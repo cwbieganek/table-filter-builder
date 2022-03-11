@@ -1,6 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
+// Global blueprint CSS
+import '../node_modules/normalize.css'
+import '../node_modules/@blueprintjs/core/lib/css/blueprint.css'
+
+// Blueprint components
+import { Button } from '@blueprintjs/core'
+
+// Custom components
 import Greeting from '@/components/Greeting/Greeting'
 import Navbar from '@/components/Navbar/Navbar'
 
@@ -51,6 +59,8 @@ export default function Home() {
             </p>
           </a>
         </div>
+
+				<Button intent="success" text="button content" />
       </main>
 
       <footer className={styles.footer}>
