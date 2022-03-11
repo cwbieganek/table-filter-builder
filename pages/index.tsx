@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
+import Image from 'next/image';
 
 // Global blueprint CSS
-import '../node_modules/normalize.css'
-import '../node_modules/@blueprintjs/core/lib/css/blueprint.css'
+import '../node_modules/normalize.css';
+import '../node_modules/@blueprintjs/core/lib/css/blueprint.css';
 
 // Blueprint components
 import { 
@@ -13,14 +13,13 @@ import {
 	Navbar, 
 	NavbarGroup, 
 	NavbarHeading 
-} from '@blueprintjs/core'
+} from '@blueprintjs/core';
 
 // Custom components
-import Greeting from '@/components/Greeting/Greeting'
-import FilterBuilder from '@/components/FilterBuilder/FilterBuilder'
-// import Navbar from '@/components/Navbar/Navbar'
+import Greeting from '@/components/Greeting/Greeting';
+import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
 
-import styles from '@/pages/index.module.css'
+import styles from '@/pages/index.module.css';
 
 export default function Home() {
   return (
@@ -47,5 +46,5 @@ export default function Home() {
 
       <footer className={styles.footer}>Footer</footer>
     </div>
-  )
+  );
 }
