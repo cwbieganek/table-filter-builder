@@ -17,6 +17,7 @@ import {
 
 // Custom components
 import Greeting from '@/components/Greeting/Greeting'
+import FilterBuilder from '@/components/FilterBuilder/FilterBuilder'
 // import Navbar from '@/components/Navbar/Navbar'
 
 import styles from '@/pages/index.module.css'
@@ -37,6 +38,11 @@ export default function Home() {
 
       <main>
 				<Greeting firstName='Chris' lastName='Bieganek' />
+				<FilterBuilder fields={[
+					{name: "First Name", type: "TEXT"},
+					{name: "Last Name", type: "TEXT"},
+					{name: "Age", type: "NUMBER"}
+				]}/>
       </main>
 
       <footer className={styles.footer}>Footer</footer>
