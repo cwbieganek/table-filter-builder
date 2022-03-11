@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import Greeting from '@/components/Greeting/Greeting'
+import Navbar from '@/components/Navbar/Navbar'
 
 import styles from '@/pages/index.module.css'
 
@@ -13,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+			<Navbar title="Table Filter Builder" />
       <main>
 				<Greeting firstName='Chris' lastName='Bieganek' />
         <h1 className={styles.title}>

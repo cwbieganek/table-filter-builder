@@ -1,0 +1,10 @@
+.navbar {
+	height: 60px;
+	width: 100%;
+	border-bottom: 2px solid black;
+}
+
+.title {
+	height: 100%;
+	text-align: center;
+}
