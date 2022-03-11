@@ -6,23 +6,35 @@ import '../node_modules/normalize.css'
 import '../node_modules/@blueprintjs/core/lib/css/blueprint.css'
 
 // Blueprint components
-import { Button } from '@blueprintjs/core'
+import { 
+	Alignment, 
+	Button, 
+	Classes, 
+	Navbar, 
+	NavbarGroup, 
+	NavbarHeading 
+} from '@blueprintjs/core'
 
 // Custom components
 import Greeting from '@/components/Greeting/Greeting'
-import Navbar from '@/components/Navbar/Navbar'
+// import Navbar from '@/components/Navbar/Navbar'
 
 import styles from '@/pages/index.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className={`${Classes.DARK} ${styles.container}`}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-			<Navbar title="Table Filter Builder" />
+			<Navbar>
+				<NavbarGroup align={Alignment.CENTER}>
+					<NavbarHeading>Table Filter Builder</NavbarHeading>
+				</NavbarGroup>
+			</Navbar>
+
       <main>
 				<Greeting firstName='Chris' lastName='Bieganek' />
         <h1 className={styles.title}>
