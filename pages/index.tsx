@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
+import Greeting from '@/components/Greeting/Greeting'
+
 import styles from '@/pages/index.module.css'
 
 export default function Home() {
@@ -12,8 +14,9 @@ export default function Home() {
       </Head>
 
       <main>
+				<Greeting firstName='Chris' lastName='Bieganek' />
         <h1 className={styles.title}>
-          Hello Chris! Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
