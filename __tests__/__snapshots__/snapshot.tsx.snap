@@ -6,10 +6,19 @@ exports[`renders homepage unchanged 1`] = `
     class="container"
   >
     <main>
+      <div>
+        <h1>
+          Hello 
+          Chris
+           
+          Bieganek
+          !
+        </h1>
+      </div>
       <h1
         class="title"
       >
-        Hello Chris! Welcome to 
+        Welcome to 
         <a
           href="https://nextjs.org"
         >
