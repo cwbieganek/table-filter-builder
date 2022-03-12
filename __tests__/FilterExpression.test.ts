@@ -72,4 +72,9 @@ describe('FilterExpression', () => {
     filterExpression = new FilterExpression(dateA, dateA, "=");
     expect(filterExpression.evaluate()).toBeTruthy();
   });
+
+  it('throws a ComparisonError when an invalid operator is passed', () => {
+    let filterExpression = new FilterExpression(1, 2, "");
+    expect(filterExpression.evaluate).toThrow();
+  });
 });
