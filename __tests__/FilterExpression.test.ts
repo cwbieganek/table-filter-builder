@@ -19,6 +19,9 @@ describe('FilterExpression', () => {
 
     filterExpression = new FilterExpression(2, 2, ">=");
     expect(filterExpression.evaluate()).toBeTruthy();
+
+    filterExpression = new FilterExpression(2, 2, "=");
+    expect(filterExpression.evaluate()).toBeTruthy();
   });
 
   it('correctly compares two strings', () => {
@@ -38,6 +41,9 @@ describe('FilterExpression', () => {
     expect(filterExpression.evaluate()).toBeTruthy();
 
     filterExpression = new FilterExpression("a", "a", ">=");
+    expect(filterExpression.evaluate()).toBeTruthy();
+
+    filterExpression = new FilterExpression("a", "a", "=");
     expect(filterExpression.evaluate()).toBeTruthy();
   });
 
@@ -61,6 +67,9 @@ describe('FilterExpression', () => {
     expect(filterExpression.evaluate()).toBeTruthy();
 
     filterExpression = new FilterExpression(dateA, dateA, ">=");
+    expect(filterExpression.evaluate()).toBeTruthy();
+
+    filterExpression = new FilterExpression(dateA, dateA, "=");
     expect(filterExpression.evaluate()).toBeTruthy();
   });
 });
