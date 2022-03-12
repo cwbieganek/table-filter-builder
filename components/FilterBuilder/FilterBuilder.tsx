@@ -3,19 +3,12 @@ import { useState } from 'react';
 
 import { HTMLSelect } from '@blueprintjs/core';
 
-/**
- * Binary logical operators such as AND, OR, etc.
- */
-export type LogicalOperator = "AND" | "OR" | "";
-
-/**
- * Comparison operators such as >, =, <, etc.
- */
-export type ComparisonOperator = ">" | ">=" | "=" | "<=" | "<" | "";
-
-// These will be used to populate the HTMLSelect components
-const LOGICAL_OPERATORS: LogicalOperator[] = ["AND", "OR"];
-const COMPARISON_OPERATORS: ComparisonOperator[] = [">", ">=", "=", "<=", "<"]; 
+import { 
+  LogicalOperator,
+  ComparisonOperator,
+  LOGICAL_OPERATORS,
+  COMPARISON_OPERATORS
+} from 'modules/Filter/Logic';
 
 /**
  * Represents a field/column in a table.
