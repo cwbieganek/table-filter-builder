@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { HTMLSelect } from '@blueprintjs/core';
+import { Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
 import { 
   LogicalOperator,
@@ -49,7 +49,7 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
 	}
 
 	return (
-		<div>
+		<Card elevation={Elevation.TWO}>
 			<h2>Filter Builder</h2>
       <div className={styles.row}>
         <HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
@@ -69,7 +69,7 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
         </HTMLSelect>
       </div>
 			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
-		</div>
+		</Card>
 	);
 };
 
