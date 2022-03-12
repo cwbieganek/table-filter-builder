@@ -10,6 +10,9 @@ import {
   COMPARISON_OPERATORS
 } from '../../modules/Filter/Logic';
 
+// CSS
+import styles from './FilterBuilder.module.css';
+
 /**
  * Represents a field/column in a table.
  */
@@ -48,20 +51,24 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
 	return (
 		<div>
 			<h2>Filter Builder</h2>
-			<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
-				<option value="">Choose a field...</option>
-				{fields.map((field, i) => {
-					return <option key={i} value={field.name}>{field.name}</option>;
-				})}
-  		</HTMLSelect>
-			<div>Selected field name: {selectedFieldName}</div>
-			<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
-				<option value="">Choose a comparison...</option>
-				{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
-					return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
-				})}
-  		</HTMLSelect>
-			<div>Selected comparison: {selectedComparisonOperator}</div>
+      <div className={styles.row}>
+        <HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
+          <option value="">Choose a field...</option>
+          {fields.map((field, i) => {
+            return <option key={i} value={field.name}>{field.name}</option>;
+          })}
+        </HTMLSelect>
+      </div>
+			<div className={styles.row}>Selected field name: {selectedFieldName}</div>
+      <div className={styles.row}>
+        <HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
+          <option value="">Choose a comparison...</option>
+          {COMPARISON_OPERATORS.map((comparisonOperator, i) => {
+            return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
+          })}
+        </HTMLSelect>
+      </div>
+			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
 		</div>
 	);
 };
