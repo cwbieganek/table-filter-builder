@@ -2,6 +2,12 @@ import { ComparisonOperator } from "./Logic";
 
 export type ComparableType = string | number | Date;
 
+export class ComparisonError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 export default class FilterExpression {
   left: ComparableType;
   right: ComparableType;
@@ -14,6 +20,19 @@ export default class FilterExpression {
   }
 
   public evaluate(): boolean {
-    return true;
+    switch (this.operator) {
+      case "<":
+        return this.left < this.right;
+      case "<=":
+        return this.left <= this.right;
+      case "=":
+        return this.left === this.right;
+      case ">":
+        return this.left > this.right;
+      case ">=":
+          return this.left >= this.right;
+      default:
+        throw new ComparisonError(`${this.operator} is not valid a operator. Must be a ComparisonOperator type.`);
+    }
   }
 }
