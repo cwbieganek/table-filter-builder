@@ -36,7 +36,10 @@ exports[`renders homepage unchanged 1`] = `
           class="bp3-html-select"
         >
           <select>
-            <option>
+            <option
+              selected=""
+              value=""
+            >
               Choose a field...
             </option>
             <option
@@ -83,7 +86,10 @@ exports[`renders homepage unchanged 1`] = `
           class="bp3-html-select"
         >
           <select>
-            <option>
+            <option
+              selected=""
+              value=""
+            >
               Choose a comparison...
             </option>
             <option
