@@ -57,7 +57,6 @@ exports[`renders homepage unchanged 1`] = `
             >
               Age
             </option>
-            q
           </select>
           <span
             class="bp3-icon bp3-icon-double-caret-vertical"
