@@ -50,7 +50,7 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
 
 	return (
 		<Card elevation={Elevation.TWO}>
-			<h2>Filter Builder</h2>
+			<h2 className={styles.centerText}>Filter Builder</h2>
       <div className={styles.row}>
         <HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
           <option value="">Choose a field...</option>
