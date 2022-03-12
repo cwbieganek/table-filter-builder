@@ -3,18 +3,17 @@
  */
  export type LogicalOperator = "AND" | "OR" | "";
 
- /**
-  * Comparison operators such as >, =, <, etc.
-  */
+/**
+ * Comparison operators such as >, =, <, etc.
+ */
  export type ComparisonOperator = ">" | ">=" | "=" | "<=" | "<" | "";
- 
  
  /**
  * Array of binary logical operators such as AND, OR, etc.
  */
  export const LOGICAL_OPERATORS: LogicalOperator[] = ["AND", "OR"];
 
-  /**
-  * Array of comparison operators such as >, =, <, etc.
-  */
- export const COMPARISON_OPERATORS: ComparisonOperator[] = [">", ">=", "=", "<=", "<"]; 
+/**
+* Array of comparison operators such as >, =, <, etc.
+*/
+ export const COMPARISON_OPERATORS: ComparisonOperator[] = [">", ">=", "=", "<=", "<"];
