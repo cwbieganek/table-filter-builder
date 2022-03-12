@@ -48,15 +48,15 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
 	return (
 		<div>
 			<h2>Filter Builder</h2>
-			<HTMLSelect onChange={onFieldNameSelectChange}>
-				<option selected>Choose a field...</option>
+			<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
+				<option value="">Choose a field...</option>
 				{fields.map((field, i) => {
 					return <option key={i} value={field.name}>{field.name}</option>;
 				})}
   		</HTMLSelect>
 			<div>Selected field name: {selectedFieldName}</div>
-			<HTMLSelect onChange={onComparisonOperatorSelectChange}>
-				<option selected>Choose a comparison...</option>
+			<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
+				<option value="">Choose a comparison...</option>
 				{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
 					return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
 				})}
