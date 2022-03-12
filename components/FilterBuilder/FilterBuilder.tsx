@@ -8,7 +8,7 @@ import {
   ComparisonOperator,
   LOGICAL_OPERATORS,
   COMPARISON_OPERATORS
-} from 'modules/Filter/Logic';
+} from '../../modules/Filter/Logic';
 
 /**
  * Represents a field/column in a table.
