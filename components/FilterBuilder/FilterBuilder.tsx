@@ -20,7 +20,7 @@ export interface IField {
 	/**
 	 * The type of the column (text, number, etc.).
 	 */
-	type: "TEXT" | "NUMBER";
+	type: "TEXT" | "NUMBER" | "DATE";
 }
 
 export interface IProps extends React.HTMLProps<HTMLDivElement> {
