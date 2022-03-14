@@ -20,7 +20,10 @@ describe('FilterExpression', () => {
     filterExpression = new FilterExpression(2, 2, ">=");
     expect(filterExpression.evaluate()).toBeTruthy();
 
-    filterExpression = new FilterExpression(2, 2, "=");
+    filterExpression = new FilterExpression(2, 2, "!=");
+    expect(filterExpression.evaluate()).toBeFalsy();
+
+    filterExpression = new FilterExpression(2, 3, "!=");
     expect(filterExpression.evaluate()).toBeTruthy();
   });
 
@@ -45,6 +48,12 @@ describe('FilterExpression', () => {
 
     filterExpression = new FilterExpression("a", "a", "=");
     expect(filterExpression.evaluate()).toBeTruthy();
+
+    filterExpression = new FilterExpression("a", "b", "!=");
+    expect(filterExpression.evaluate()).toBeTruthy();
+
+    filterExpression = new FilterExpression("a", "a", "!=");
+    expect(filterExpression.evaluate()).toBeFalsy();
   });
 
   it('correctly compares two dates', () => {
