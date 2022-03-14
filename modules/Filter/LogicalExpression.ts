@@ -8,12 +8,12 @@ export class ComparisonError extends Error {
   }
 }
 
-export default class FilterExpression {
-  static evaluateMultiple(expressions: FilterExpression[]): boolean {
+export default class LogicalExpression {
+  static evaluateMultiple(expressions: LogicalExpression[]): boolean {
     let result: boolean = true;
 
-    expressions.forEach((filterExpression) => {
-      result = result && filterExpression.evaluate();
+    expressions.forEach((logicalExpression) => {
+      result = result && logicalExpression.evaluate();
       if (!result) {
         // Short circuit since the result is false.
         return result;
@@ -25,7 +25,7 @@ export default class FilterExpression {
   }
 
   /**
-   * The value on the left side of the expression. Will always be the value of a specific field.
+   * The value on the left side of the expression.
    */
   private _left: ComparableType;
 
