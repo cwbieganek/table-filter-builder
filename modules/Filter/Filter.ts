@@ -8,8 +8,13 @@ export default class Filter {
 
     this._expressions.forEach((filterExpression) => {
       result = result && filterExpression.evaluate();
+      if (!result) {
+        // Short circuit since the result is false.
+        return result;
+      }
     });
 
+    // true at this point
     return result;
   }
 
