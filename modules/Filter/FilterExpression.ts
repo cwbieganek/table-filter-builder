@@ -31,6 +31,8 @@ export default class FilterExpression {
         return this.left > this.right;
       case ">=":
           return this.left >= this.right;
+      case "!=":
+        return this.left != this.right;
       default:
         throw new ComparisonError(`${this.operator} is not valid a operator. Must be a ComparisonOperator type.`);
     }
