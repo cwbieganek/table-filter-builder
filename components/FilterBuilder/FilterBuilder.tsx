@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
-import { COMPARISON_OPERATORS } from '../../modules/Filter/Logic';
+import { COMPARISON_OPERATORS } from '../../modules/Logic/Logic';
 
 // CSS
 import styles from './FilterBuilder.module.css';

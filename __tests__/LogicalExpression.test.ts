@@ -1,4 +1,4 @@
-import LogicalExpression from "../modules/Filter/LogicalExpression";
+import LogicalExpression from "../modules/Logic/LogicalExpression";
 
 describe('LogicalExpression', () => {
   describe('evaluate()', () => {
