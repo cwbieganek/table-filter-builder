@@ -86,4 +86,24 @@ describe('FilterExpression', () => {
     let filterExpression = new FilterExpression(1, 2, "");
     expect(filterExpression.evaluate).toThrow();
   });
+
+  it('returns true when all expressions are true', () => {
+    let expressions = [
+      new FilterExpression(1, 2, "<"),
+      new FilterExpression(1, 2, "<"),
+      new FilterExpression(1, 2, "<")
+    ];
+
+    expect(FilterExpression.evaluateMultiple(expressions)).toBeTruthy();
+  });
+
+  it('returns false when one of the expressions is false', () => {
+    let expressions = [
+      new FilterExpression(1, 2, "<"),
+      new FilterExpression(1, 2, "<"),
+      new FilterExpression(2, 1, "<")
+    ];
+
+    expect(FilterExpression.evaluateMultiple(expressions)).toBeFalsy();
+  });
 });

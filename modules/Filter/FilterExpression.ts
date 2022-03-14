@@ -9,6 +9,21 @@ export class ComparisonError extends Error {
 }
 
 export default class FilterExpression {
+  static evaluateMultiple(expressions: FilterExpression[]): boolean {
+    let result: boolean = true;
+
+    expressions.forEach((filterExpression) => {
+      result = result && filterExpression.evaluate();
+      if (!result) {
+        // Short circuit since the result is false.
+        return result;
+      }
+    });
+
+    // true at this point
+    return result;
+  }
+
   /**
    * The value on the left side of the expression. Will always be the value of a specific field.
    */
