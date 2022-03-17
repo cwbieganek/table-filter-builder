@@ -1,4 +1,4 @@
-import { ComparisonOperator } from '../Logic/Logic';
+import { ComparisonOperator } from '../Logic/Operators';
 import { ComparableType } from '../Logic/LogicalExpression';
 
 /**
