@@ -28,13 +28,23 @@ export class RowComparison {
   }
 }
 
+
+/**
+ * Stores a list of RowComparison objects and offers a method for evaluating a row based on the comparisons.
+ */
 export class RowFilter {
+  /**
+   * Array of RowComparison objects that will be used to evaluate a row to determine if it matches the filter.
+   */
   comparisons: RowComparison[];
 
   constructor(comparisons: RowComparison[]) {
     this.comparisons = comparisons;
   }
 
+  /**
+   * Compares rowMap to one or more RowComparison objects.
+   */
   evaluateRow(rowMap: RowMappedType): boolean {
     let expressions: LogicalExpression[] = [];
 
