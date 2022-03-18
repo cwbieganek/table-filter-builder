@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
+import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
 
 // CSS
 import styles from './FilterBuilder.module.css';
