@@ -29,6 +29,11 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	 * A list of the fields that can be used in the FilterBuilder.
 	 */
 	fields: IField[];
+
+  /**
+   * Callback that will be expected when the user creates a filter.
+   */
+  onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
