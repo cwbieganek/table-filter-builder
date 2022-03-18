@@ -49,6 +49,10 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 		setSelectedComparisonOperator(event.currentTarget.value);
 	}
 
+  function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
+    alert("Create Filter button was clicked.");
+  }
+
 	return (
 		<Card elevation={Elevation.TWO}>
 			<h2 className={styles.centerText}>Filter Builder</h2>
@@ -70,7 +74,7 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
         </HTMLSelect>
       </div>
 			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
-      <Button icon="add">Create Filter</Button>
+      <Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
 		</Card>
 	);
 };
