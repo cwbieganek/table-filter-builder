@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { Card, Elevation, HTMLSelect } from '@blueprintjs/core';
+import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
-import { COMPARISON_OPERATORS } from '../../modules/Filter/Logic';
+import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
+import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
 
 // CSS
 import styles from './FilterBuilder.module.css';
@@ -28,9 +29,14 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	 * A list of the fields that can be used in the FilterBuilder.
 	 */
 	fields: IField[];
+
+  /**
+   * Callback that will be expected when the user creates a filter.
+   */
+  onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
-const Greeting: React.FC<IProps> = ({ fields }) => {
+const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -64,8 +70,9 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
         </HTMLSelect>
       </div>
 			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
+      <Button icon="add">Create Filter</Button>
 		</Card>
 	);
 };
 
-export default Greeting;
+export default FilterBuilder;
