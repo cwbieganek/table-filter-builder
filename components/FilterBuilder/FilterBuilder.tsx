@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { Card, Elevation, HTMLSelect } from '@blueprintjs/core';
+import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
 import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
@@ -70,6 +70,7 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
         </HTMLSelect>
       </div>
 			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
+      <Button icon="add">Create Filter</Button>
 		</Card>
 	);
 };
