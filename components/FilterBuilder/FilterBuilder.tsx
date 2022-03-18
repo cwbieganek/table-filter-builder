@@ -31,7 +31,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	fields: IField[];
 }
 
-const Greeting: React.FC<IProps> = ({ fields }) => {
+const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -69,4 +69,4 @@ const Greeting: React.FC<IProps> = ({ fields }) => {
 	);
 };
 
-export default Greeting;
+export default FilterBuilder;
