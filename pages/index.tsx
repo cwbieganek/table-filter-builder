@@ -22,12 +22,12 @@ import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
 import styles from '@/pages/index.module.css';
 
 export default function Home() {
-  return (
-    <div className={`${Classes.DARK} ${styles.container}`}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	return (
+		<div className={`${Classes.DARK} ${styles.container}`}>
+			<Head>
+				<title>Create Next App</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 
 			<Navbar>
 				<NavbarGroup align={Alignment.CENTER}>
@@ -35,16 +35,16 @@ export default function Home() {
 				</NavbarGroup>
 			</Navbar>
 
-      <main>
+			<main>
 				<Greeting firstName='Chris' lastName='Bieganek' />
 				<FilterBuilder fields={[
 					{name: "First Name", type: "TEXT"},
 					{name: "Last Name", type: "TEXT"},
 					{name: "Age", type: "NUMBER"}
 				]}/>
-      </main>
+			</main>
 
-      <footer className={styles.footer}>Footer</footer>
-    </div>
-  );
+			<footer className={styles.footer}>Footer</footer>
+		</div>
+	);
 }
