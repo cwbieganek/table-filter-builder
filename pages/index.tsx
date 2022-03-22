@@ -40,8 +40,11 @@ export default function Home() {
 				<div className={styles.filterBuilderContainer}>
 					<FilterBuilder fields={[
 						{name: "First Name", type: "TEXT"},
-						{name: "Last Name", type: "TEXT"},
-						{name: "Age", type: "NUMBER"}
+						{name: "Last Initial", type: "TEXT"},
+						{name: "Age", type: "NUMBER"},
+						{name: "Job Title", type: "TEXT"},
+						{name: "Salary", type: "NUMBER"},
+						{name: "Tenure", type: "NUMBER"}
 					]}/>
 				</div>
 				<TableExample />
