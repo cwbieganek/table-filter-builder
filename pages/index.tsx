@@ -37,11 +37,13 @@ export default function Home() {
 
 			<main>
 				<Greeting firstName='Chris' lastName='Bieganek' />
-				<FilterBuilder fields={[
-					{name: "First Name", type: "TEXT"},
-					{name: "Last Name", type: "TEXT"},
-					{name: "Age", type: "NUMBER"}
-				]}/>
+				<div className={styles.filterBuilderContainer}>
+					<FilterBuilder fields={[
+						{name: "First Name", type: "TEXT"},
+						{name: "Last Name", type: "TEXT"},
+						{name: "Age", type: "NUMBER"}
+					]}/>
+				</div>
 				<TableExample />
 			</main>
 
