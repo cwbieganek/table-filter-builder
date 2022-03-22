@@ -17,6 +17,7 @@ import {
 // Custom components
 import Greeting from '@/components/Greeting/Greeting';
 import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
+import TableExample from '@/components/TableExample/TableExample';
 
 import styles from '@/pages/index.module.css';
 
@@ -41,6 +42,7 @@ export default function Home() {
 					{name: "Last Name", type: "TEXT"},
 					{name: "Age", type: "NUMBER"}
 				]}/>
+				<TableExample />
 			</main>
 
 			<footer className={styles.footer}>Footer</footer>
