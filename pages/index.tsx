@@ -27,17 +27,6 @@ import { FakeRecord, getFakeData } from '../modules/Fake';
 import styles from '@/pages/index.module.css';
 
 export default function Home() {
-	const [fakeRecords, setFakeRecords] = useState<FakeRecord[]>([]);
-
-	// Get fake data asynchronously, but only once
-	useEffect(() => {
-		getFakeData().then((fakeData) => {
-			console.log("Got fake data:");
-			console.log(fakeData);
-			setFakeRecords(fakeData);
-		});
-	}, []);
-
 	return (
 		<div className={`${Classes.DARK} ${styles.container}`}>
 			<Head>
