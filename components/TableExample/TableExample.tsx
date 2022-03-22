@@ -19,11 +19,12 @@ const TableExample: React.FC<{}> = () => {
 	return(
 		<HotkeysProvider>
 				<Table2 numRows={100}>
-						<Column />
-						<Column />
-						<Column />
-						<Column />
-						<Column />
+						<Column name="First Name" />
+						<Column name="Last Initial" />
+						<Column name="Age" />
+						<Column name="Job Title" />
+						<Column name="Salary" />
+						<Column name="Tenure" />
 				</Table2>
 		</HotkeysProvider>
 	);
