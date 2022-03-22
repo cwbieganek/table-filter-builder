@@ -1,4 +1,4 @@
-type FakeRecord = {
+export type FakeRecord = {
 	firstName: string;
 	lastInitial: string;
 	age: number;
