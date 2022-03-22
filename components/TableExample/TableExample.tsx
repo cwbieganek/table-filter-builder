@@ -1,6 +1,6 @@
 import { HotkeysProvider } from "@blueprintjs/core";
 import { Column, Table2 } from "@blueprintjs/table";
-import { FakeRecord, getFakeData } from "../../modules/Fake";
+import { FakeRecord, getFakeData } from "@/modules/Fake";
 import React from "react";
 import { useState, useEffect } from "react";
 
