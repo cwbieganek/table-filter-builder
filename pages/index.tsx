@@ -1,9 +1,12 @@
+import  { useState, useEffect } from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
 
 // Global blueprint CSS
 import '../node_modules/normalize.css';
 import '../node_modules/@blueprintjs/core/lib/css/blueprint.css';
+import '../node_modules/@blueprintjs/table/lib/css/table.css';
 
 // Blueprint components
 import { 
@@ -19,9 +22,22 @@ import {
 import Greeting from '@/components/Greeting/Greeting';
 import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
 
+import { FakeRecord, getFakeData } from '../modules/Fake';
+
 import styles from '@/pages/index.module.css';
 
 export default function Home() {
+	const [fakeRecords, setFakeRecords] = useState<FakeRecord[]>([]);
+
+	// Get fake data asynchronously, but only once
+	useEffect(() => {
+		getFakeData().then((fakeData) => {
+			console.log("Got fake data:");
+			console.log(fakeData);
+			setFakeRecords(fakeData);
+		});
+	}, []);
+
 	return (
 		<div className={`${Classes.DARK} ${styles.container}`}>
 			<Head>
