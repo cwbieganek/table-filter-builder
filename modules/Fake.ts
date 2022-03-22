@@ -1,3 +1,5 @@
+import { ComparableType } from "./Logic/LogicalExpression";
+
 export type FakeRecord = {
 	firstName: string;
 	lastInitial: string;
@@ -98,6 +100,32 @@ export function getFakeData(): Promise<FakeRecord[]> {
 		// Wait half a second before resolving
 		setTimeout(() => {
 			resolve(fakeRecords);
+		}, 200);
+	});
+}
+
+/**
+ * Resolves to an array of ComparableType arrays. This is compatible with the Blueprint JS CellRenderer.
+ */
+export function getFake2dArray(): Promise<ComparableType[][]> {
+	return new Promise((resolve, reject) => {
+		let fakeRows: ComparableType[][] = [];
+
+		for (let i = 1; i <= 100; i++) {
+			let fakeRecord = getFakeRecord();
+			fakeRows.push([
+				fakeRecord.firstName,
+				fakeRecord.lastInitial,
+				fakeRecord.age,
+				fakeRecord.jobTitle,
+				fakeRecord.salary,
+				fakeRecord.tenure
+			]);
+		}
+
+		// Wait half a second before resolving
+		setTimeout(() => {
+			resolve(fakeRows);
 		}, 200);
 	});
 }
