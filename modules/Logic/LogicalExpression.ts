@@ -59,7 +59,7 @@ export default class LogicalExpression {
 			case ">":
 				return this._left > this._right;
 			case ">=":
-					return this._left >= this._right;
+  			return this._left >= this._right;
 			case "!=":
 				return this._left != this._right;
 			default:
