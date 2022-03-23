@@ -47,7 +47,9 @@ export default function Home() {
 						{name: "Tenure", type: "NUMBER"}
 					]}/>
 				</div>
-				<TableExample />
+				<div className={styles.tableExampleContainer}>
+					<TableExample />
+				</div>
 			</main>
 
 			<footer className={styles.footer}>Footer</footer>
