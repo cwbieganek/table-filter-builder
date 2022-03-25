@@ -5,15 +5,6 @@ import '../node_modules/normalize.css';
 import '../node_modules/@blueprintjs/core/lib/css/blueprint.css';
 import '../node_modules/@blueprintjs/table/lib/css/table.css';
 
-// Blueprint components
-import { 
-	Alignment, 
-	Classes, 
-	Navbar, 
-	NavbarGroup, 
-	NavbarHeading 
-} from '@blueprintjs/core';
-
 // Custom components
 import Greeting from '@/components/Greeting/Greeting';
 import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
@@ -38,7 +29,7 @@ export default function Home() {
 					{name: "Age", type: "NUMBER"},
 					{name: "Job Title", type: "TEXT"},
 					{name: "Salary", type: "NUMBER"},
-					{name: "Tenure", type: "NUMBER"}
+				    {name: "Tenure", type: "NUMBER"}
 				]}/>
 			</div>
 			
