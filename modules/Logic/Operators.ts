@@ -8,7 +8,7 @@ export type LogicalOperator = "AND" | "";
  */
 export type ComparisonOperator = ">" | ">=" | "=" | "!=" | "<=" | "<" | "";
  
- /**
+/**
  * Array of binary logical operators such as AND, OR, etc.
  */
 export const LOGICAL_OPERATORS: LogicalOperator[] = ["AND"];

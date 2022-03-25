@@ -38,12 +38,12 @@ const TableExample: React.FC<{}> = () => {
 		return(
 			<HotkeysProvider>
 				<Table2 numRows={100}>
-						<Column name="First Name" cellRenderer={cellRenderer} />
-						<Column name="Last Initial" cellRenderer={cellRenderer} />
-						<Column name="Age" cellRenderer={cellRenderer} />
-						<Column name="Job Title" cellRenderer={cellRenderer} />
-						<Column name="Salary" cellRenderer={cellRenderer} />
-						<Column name="Tenure" cellRenderer={cellRenderer} />
+					<Column name="First Name" cellRenderer={cellRenderer} />
+					<Column name="Last Initial" cellRenderer={cellRenderer} />
+					<Column name="Age" cellRenderer={cellRenderer} />
+					<Column name="Job Title" cellRenderer={cellRenderer} />
+					<Column name="Salary" cellRenderer={cellRenderer} />
+					<Column name="Tenure" cellRenderer={cellRenderer} />
 				</Table2>
 			</HotkeysProvider>
 		);
