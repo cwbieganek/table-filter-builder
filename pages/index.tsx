@@ -25,7 +25,7 @@ export default function Home() {
 	return (
 		<div className={`${Classes.DARK} ${styles.container}`}>
 			<Head>
-				<title>Create Next App</title>
+				<title>Table Filter Builder</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
