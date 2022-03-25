@@ -23,36 +23,28 @@ import styles from '@/pages/index.module.css';
 
 export default function Home() {
 	return (
-		<div className={`${Classes.DARK} ${styles.container}`}>
+		<>
 			<Head>
 				<title>Table Filter Builder</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Navbar>
-				<NavbarGroup align={Alignment.CENTER}>
-					<NavbarHeading>Table Filter Builder</NavbarHeading>
-				</NavbarGroup>
-			</Navbar>
+			<Greeting firstName='Chris' lastName='Bieganek' />
 
-			<main>
-				<Greeting firstName='Chris' lastName='Bieganek' />
-				<div className={styles.filterBuilderContainer}>
-					<FilterBuilder fields={[
-						{name: "First Name", type: "TEXT"},
-						{name: "Last Initial", type: "TEXT"},
-						{name: "Age", type: "NUMBER"},
-						{name: "Job Title", type: "TEXT"},
-						{name: "Salary", type: "NUMBER"},
-						{name: "Tenure", type: "NUMBER"}
-					]}/>
-				</div>
-				<div className={styles.tableExampleContainer}>
-					<TableExample />
-				</div>
-			</main>
-
-			<footer className={styles.footer}>Footer</footer>
-		</div>
+			<div className={styles.filterBuilderContainer}>
+				<FilterBuilder fields={[
+					{name: "First Name", type: "TEXT"},
+					{name: "Last Initial", type: "TEXT"},
+					{name: "Age", type: "NUMBER"},
+					{name: "Job Title", type: "TEXT"},
+					{name: "Salary", type: "NUMBER"},
+					{name: "Tenure", type: "NUMBER"}
+				]}/>
+			</div>
+			
+			<div className={styles.tableExampleContainer}>
+				<TableExample />
+			</div>
+		</>
 	);
 }
