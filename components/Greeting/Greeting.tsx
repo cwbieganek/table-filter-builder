@@ -15,20 +15,22 @@ export interface Props extends React.HTMLProps<HTMLDivElement> {
 }
 
 const Greeting: React.FC<Props> = ({ firstName, lastName, alignment }) => {
-	let className = styles.h1;
+	let className = "";
 
 	if (alignment) {
 		switch (alignment) {
 			case Alignment.LEFT:
 				break;
 			case Alignment.CENTER:
-				className += styles.centerText;
+				className += (" " + styles.centerText);
 				break;
 			case Alignment.RIGHT:
-				className += styles.rightText;
+				className += (" " + styles.rightText);
 				break;
 		}
 	}
+
+	className = className.trim();
 
 	return (
 		<h1 className={className}>Hello {firstName} {lastName}!</h1>
