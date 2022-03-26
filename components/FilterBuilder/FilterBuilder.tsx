@@ -44,18 +44,6 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
-	let [ selectedFieldName, setSelectedFieldName ] = useState("");
-
-	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedFieldName(event.currentTarget.value);
-	}
-
-	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
-
-	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedComparisonOperator(event.currentTarget.value);
-	}
-
 	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
 		alert("Create Filter button was clicked.");
 	}
