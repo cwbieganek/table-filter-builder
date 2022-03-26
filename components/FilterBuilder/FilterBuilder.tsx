@@ -7,6 +7,7 @@ import { Card, Elevation } from '@blueprintjs/core';
 
 // Custom Modules
 import { RowFilter } from "../../modules/Filter/RowFilter";
+import type { RowComparison } from '../../modules/Filter/RowFilter';
 
 // Custom components
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
@@ -39,13 +40,14 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
-	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
-		alert("Create Filter button was clicked.");
+	function onComparisonCreated(rowComparison: RowComparison) {
+		console.log("A row comparison was created:");
+		console.log(rowComparison);
 	}
 
 	return (
 		<Card elevation={Elevation.TWO}>
-			<ComparisonBuilder fields={fields} title="Comparison 1"></ComparisonBuilder>
+			<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
 		</Card>
 	);
 };
