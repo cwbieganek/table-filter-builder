@@ -45,6 +45,10 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
 
+/**
+ * Component that is used to build a row comparison, which can be used as part of a row filter
+ * for filter the contents of a table.
+ */
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
