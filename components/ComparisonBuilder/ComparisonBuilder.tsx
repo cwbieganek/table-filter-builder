@@ -69,7 +69,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 	}
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{ title && renderTitle() }
 			<div className={styles.row}>
 				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
