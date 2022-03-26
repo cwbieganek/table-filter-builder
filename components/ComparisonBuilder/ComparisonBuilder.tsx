@@ -6,8 +6,9 @@ import { useState } from 'react';
 import { Button, HTMLSelect } from '@blueprintjs/core';
 
 // Custom modules
-import { ComparisonOperator, COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
+import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
+import type { ComparisonOperator } from '../../modules/Logic/Operators';
+import type { RowComparison } from "../../modules/Filter/RowFilter";
 
 // Custom CSS
 import styles from './ComparisonBuilder.module.css';
