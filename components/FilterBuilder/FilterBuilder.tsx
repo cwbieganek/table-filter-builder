@@ -8,7 +8,10 @@ import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
 // Custom Modules
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
+import { RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
+
+// Custom types
+import type { RowMappedType } from '../../modules/Filter/RowFilter';
 
 // Custom components
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';

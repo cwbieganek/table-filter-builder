@@ -1,5 +1,6 @@
 import { HotkeysProvider } from "@blueprintjs/core";
-import { Cell, CellRenderer, Column, ColumnLoadingOption, ICellProps, Table2 } from "@blueprintjs/table";
+import { Cell, CellRenderer, Column, ColumnLoadingOption, Table2 } from "@blueprintjs/table";
+import type { ICellProps } from "@blueprintjs/table";
 import { FakeRecord, getFake2dArray } from "@/modules/Fake";
 import { ComparableType } from "@/modules/Logic/LogicalExpression";
 import React, { ReactElement } from "react";

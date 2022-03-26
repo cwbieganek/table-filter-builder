@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { IField } from '@/components/ComparisonBuilder/ComparisonBuilder';
 import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
+import type { IField } from '@/components/ComparisonBuilder/ComparisonBuilder';
 
 describe('Greeting', () => {
 	it('renders without crashing', () => {
