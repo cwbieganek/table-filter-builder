@@ -37,6 +37,7 @@
     "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-testing-library": "5.0.1",
     "jest": "27.4.5",
+    "storybook-css-modules-preset": "^1.1.1",
     "typescript": "4.5.4"
   }
 }
