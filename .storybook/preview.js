@@ -4,7 +4,7 @@ import '../node_modules/@blueprintjs/core/lib/css/blueprint.css';
 import '../node_modules/@blueprintjs/table/lib/css/table.css';
 
 // Dark theme provider
-import ThemeProvider from '../components/ThemeProvider/ThemeProvider';
+import DarkThemeProvider from '../components/DarkThemeProvider/DarkThemeProvider';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -19,9 +19,9 @@ export const parameters = {
 export const decorators = [
 	(Story) => {
 		return (
-			<ThemeProvider>
+			<DarkThemeProvider>
 				<Story />
-			</ThemeProvider>
+			</DarkThemeProvider>
 		);
 	}
 ];
