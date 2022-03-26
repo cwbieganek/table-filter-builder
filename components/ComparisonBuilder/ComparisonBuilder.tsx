@@ -46,6 +46,8 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
+	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
+	
 
 	function renderTitle() {
 		return (
@@ -53,11 +55,10 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 		);
 	}
 
+	// Event handlers
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedFieldName(event.currentTarget.value);
 	}
-
-	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
 
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedComparisonOperator(event.currentTarget.value);
