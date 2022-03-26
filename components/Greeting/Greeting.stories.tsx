@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Greeting from './Greeting';
+import { Alignment } from './Greeting';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -17,7 +18,8 @@ export const Medium = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Medium.args = {
 	firstName: "Jane",
-	lastName: "Doe"
+	lastName: "Doe",
+	alignment: Alignment.CENTER
 };
 
 // export const Secondary = Template.bind({});
