@@ -31,9 +31,7 @@ const Greeting: React.FC<Props> = ({ firstName, lastName, alignment }) => {
 	}
 
 	return (
-		<div>
-			<h1 className={className}>Hello {firstName} {lastName}!</h1>
-		</div>
+		<h1 className={className}>Hello {firstName} {lastName}!</h1>
 	);
 };
 
