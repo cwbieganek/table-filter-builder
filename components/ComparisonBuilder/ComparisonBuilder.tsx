@@ -60,7 +60,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
 	// #endregion
 	
-
 	// #region Local Renderers
 	function renderTitle() {
 		return (
