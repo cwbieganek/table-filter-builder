@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { Button, HTMLSelect } from '@blueprintjs/core';
 
 // Custom modules
-import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowFilter } from "../../modules/Filter/RowFilter";
+import { ComparisonOperator, COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
+import { RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
 
 // Custom CSS
 import styles from './ComparisonBuilder.module.css';
@@ -39,12 +39,12 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	title?: string;
 
 	/**
-	 * Callback that will be expected when the user creates a filter.
+	 * Callback that will be expected when the user creates a comparison.
 	 */
-	onFilterCreated?: (rowFilter: RowFilter) => void;
+	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
 
-const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
+const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
 	
@@ -62,10 +62,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedComparisonOperator(event.currentTarget.value);
-	}
-
-	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
-		alert("Create Filter button was clicked.");
 	}
 
 	return (
@@ -88,7 +84,14 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 				</HTMLSelect>
 			</div>
 			<div className={styles.row}>
-				<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
+				<Button icon="add" onClick={() => {
+					let rowComparison: RowComparison = {
+						fieldName: selectedFieldName,
+						comparison: selectedComparisonOperator as ComparisonOperator,
+						value: "TODO"
+					};
+					onComparisonCreated(rowComparison);
+				}}>Create Filter</Button>
 			</div>
 		</div>
 	);
