@@ -1,4 +1,4 @@
-import { ComparableType } from "./Logic/LogicalExpression";
+import type { ComparableType } from "./Logic/LogicalExpression";
 
 export type FakeRecord = {
 	firstName: string;

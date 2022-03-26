@@ -1,23 +1,15 @@
 // React
 import React from 'react';
-import { useState } from 'react';
 
 // Blueprint JS compenents
-import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
+import { Card, Elevation} from '@blueprintjs/core';
 
 
 // Custom Modules
-import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
-
-// Custom types
-import type { RowMappedType } from '../../modules/Filter/RowFilter';
+import { RowFilter } from "../../modules/Filter/RowFilter";
 
 // Custom components
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
-
-// Custom CSS
-import styles from './FilterBuilder.module.css';
 
 /**
  * Represents a field/column in a table.
