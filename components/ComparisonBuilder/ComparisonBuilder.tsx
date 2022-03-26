@@ -87,7 +87,9 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 					})}
 				</HTMLSelect>
 			</div>
-			<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
+			<div className={styles.row}>
+				<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
+			</div>
 		</div>
 	);
 };
