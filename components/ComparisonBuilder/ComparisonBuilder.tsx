@@ -1,3 +1,4 @@
+// #region Imports
 // React
 import React from 'react';
 import { useState } from 'react';
@@ -12,7 +13,9 @@ import type { RowComparison } from "../../modules/Filter/RowFilter";
 
 // Custom CSS
 import styles from './ComparisonBuilder.module.css';
+// #endregion
 
+// #region Interfaces
 /**
  * Represents a field/column in a table.
  */
@@ -44,23 +47,29 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	 */
 	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
+// #endregion
 
+// #region Component
 /**
  * Component that is used to build a row comparison, which can be used as part of a row filter
  * for filter the contents of a table.
  */
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
+	// #region Component State
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
+	// #endregion
 	
 
+	// #region Local Renderers
 	function renderTitle() {
 		return (
 			<h2 className={styles.centerText}>{title}</h2>
 		);
 	}
+	// #endregion
 
-	// Event handlers
+	// #region Event Handlers
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedFieldName(event.currentTarget.value);
 	}
@@ -68,6 +77,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedComparisonOperator(event.currentTarget.value);
 	}
+	// #endregion
 
 	return (
 		<div className={styles.container}>
@@ -101,5 +111,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 		</div>
 	);
 };
+// #endregion
 
 export default ComparisonBuilder;
