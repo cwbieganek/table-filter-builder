@@ -3,9 +3,6 @@ import React from "react";
 // Blueprint JS
 import { Alignment, Navbar, NavbarGroup, NavbarHeading } from "@blueprintjs/core";
 
-// Blueprint CSS
-import { Classes } from "@blueprintjs/core";
-
 // Dark theme provider
 import DarkThemeProvider from '../DarkThemeProvider/DarkThemeProvider';
 

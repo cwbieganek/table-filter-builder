@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Blueprint JS compenents
-import { Card, Elevation} from '@blueprintjs/core';
+import { Card, Elevation } from '@blueprintjs/core';
 
 
 // Custom Modules
