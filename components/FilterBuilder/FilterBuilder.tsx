@@ -34,11 +34,15 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	fields: IField[];
 
 	/**
-	 * Callback that will be expected when the user creates a filter.
+	 * Callback that will be executed when the user creates a filter.
 	 */
 	onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
+/**
+ * A component for creating multiple row comparisons that can be used to filter
+ * the contents of a table.
+ */
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 	function onComparisonCreated(rowComparison: RowComparison) {
 		console.log("A row comparison was created:");
