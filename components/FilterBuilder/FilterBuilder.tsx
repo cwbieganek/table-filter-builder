@@ -1,12 +1,19 @@
+// React
 import React from 'react';
 import { useState } from 'react';
 
+// Blueprint JS compenents
 import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
 
+
+// Custom Modules
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
 import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
 
-// CSS
+// Custom components
+import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
+
+// Custom CSS
 import styles from './FilterBuilder.module.css';
 
 /**
@@ -55,26 +62,7 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 
 	return (
 		<Card elevation={Elevation.TWO}>
-			<h2 className={styles.centerText}>Filter Builder</h2>
-			<div className={styles.row}>
-				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
-					<option value="">Choose a field...</option>
-					{fields.map((field, i) => {
-						return <option key={i} value={field.name}>{field.name}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>Selected field name: {selectedFieldName}</div>
-			<div className={styles.row}>
-				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
-					<option value="">Choose a comparison...</option>
-					{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
-						return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
-			<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
+			<ComparisonBuilder fields={fields} title="Comparison 1"></ComparisonBuilder>
 		</Card>
 	);
 };
