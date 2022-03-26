@@ -79,7 +79,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 					})}
 				</HTMLSelect>
 			</div>
-			<div className={styles.row}>Selected field name: {selectedFieldName}</div>
 			<div className={styles.row}>
 				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
 					<option value="">Choose a comparison...</option>
@@ -88,7 +87,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 					})}
 				</HTMLSelect>
 			</div>
-			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
 			<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
 		</div>
 	);
