@@ -1,12 +1,13 @@
 // React
 import React from 'react';
 
-// Blueprint JS compenents
-import { Card, Elevation} from '@blueprintjs/core';
+// Blueprint JS
+import { Card, Elevation } from '@blueprintjs/core';
 
 
 // Custom Modules
 import { RowFilter } from "../../modules/Filter/RowFilter";
+import type { RowComparison } from '../../modules/Filter/RowFilter';
 
 // Custom components
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
@@ -33,19 +34,24 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	fields: IField[];
 
 	/**
-	 * Callback that will be expected when the user creates a filter.
+	 * Callback that will be executed when the user creates a filter.
 	 */
 	onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
+/**
+ * A component for creating multiple row comparisons that can be used to filter
+ * the contents of a table.
+ */
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
-	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
-		alert("Create Filter button was clicked.");
+	function onComparisonCreated(rowComparison: RowComparison) {
+		console.log("A row comparison was created:");
+		console.log(rowComparison);
 	}
 
 	return (
 		<Card elevation={Elevation.TWO}>
-			<ComparisonBuilder fields={fields} title="Comparison 1"></ComparisonBuilder>
+			<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
 		</Card>
 	);
 };

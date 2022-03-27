@@ -1,3 +1,4 @@
+// #region Imports
 // React
 import React from 'react';
 import { useState } from 'react';
@@ -7,11 +8,14 @@ import { Button, HTMLSelect } from '@blueprintjs/core';
 
 // Custom modules
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowFilter } from "../../modules/Filter/RowFilter";
+import type { ComparisonOperator } from '../../modules/Logic/Operators';
+import type { RowComparison } from "../../modules/Filter/RowFilter";
 
 // Custom CSS
 import styles from './ComparisonBuilder.module.css';
+// #endregion
 
+// #region Interfaces
 /**
  * Represents a field/column in a table.
  */
@@ -39,23 +43,32 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	title?: string;
 
 	/**
-	 * Callback that will be expected when the user creates a filter.
+	 * Callback that will be expected when the user creates a comparison.
 	 */
-	onFilterCreated?: (rowFilter: RowFilter) => void;
+	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
+// #endregion
 
-const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
+// #region Component
+/**
+ * Component that is used to build a row comparison, which can be used as part of a row filter
+ * for filter the contents of a table.
+ */
+const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
+	// #region Component State
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
+	// #endregion
 	
-
+	// #region Local Renderers
 	function renderTitle() {
 		return (
 			<h2 className={styles.centerText}>{title}</h2>
 		);
 	}
+	// #endregion
 
-	// Event handlers
+	// #region Event Handlers
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedFieldName(event.currentTarget.value);
 	}
@@ -63,13 +76,10 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedComparisonOperator(event.currentTarget.value);
 	}
-
-	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
-		alert("Create Filter button was clicked.");
-	}
+	// #endregion
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{ title && renderTitle() }
 			<div className={styles.row}>
 				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
@@ -79,7 +89,6 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 					})}
 				</HTMLSelect>
 			</div>
-			<div className={styles.row}>Selected field name: {selectedFieldName}</div>
 			<div className={styles.row}>
 				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
 					<option value="">Choose a comparison...</option>
@@ -88,10 +97,19 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title }) => {
 					})}
 				</HTMLSelect>
 			</div>
-			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
-			<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
+			<div className={styles.row}>
+				<Button icon="add" onClick={() => {
+					let rowComparison: RowComparison = {
+						fieldName: selectedFieldName,
+						comparison: selectedComparisonOperator as ComparisonOperator,
+						value: "TODO"
+					};
+					onComparisonCreated(rowComparison);
+				}}>Create Filter</Button>
+			</div>
 		</div>
 	);
 };
+// #endregion
 
 export default ComparisonBuilder;

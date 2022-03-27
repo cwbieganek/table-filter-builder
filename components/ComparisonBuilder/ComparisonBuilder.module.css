@@ -1,3 +1,9 @@
+.container {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 1rem;
+}
+
 .row {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;

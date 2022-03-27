@@ -1,3 +1,7 @@
-.h1 {
+.centerText {
 	text-align: center;
+}
+
+.rightText {
+	text-align: right;
 }

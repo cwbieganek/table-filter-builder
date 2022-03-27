@@ -126,6 +126,6 @@ export function getFake2dArray(): Promise<ComparableType[][]> {
 		// Wait half a second before resolving
 		setTimeout(() => {
 			resolve(fakeRows);
-		}, 4000);
+		}, 2000);
 	});
 }
