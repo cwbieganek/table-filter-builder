@@ -9,8 +9,8 @@ import { Cell, Column, Table2 } from "@blueprintjs/table";
 import type { ICellProps } from "@blueprintjs/table";
 
 // Custom modules
-import { getFake2dArray } from "@/modules/Fake";
-import { ComparableType } from "@/modules/Logic/LogicalExpression";
+import { getFake2dArray } from "../../modules/Fake";
+import { ComparableType } from "../../modules/Logic/LogicalExpression";
 
 const TableExample: React.FC<{}> = () => {
 	const [fakeRows, setFakeRows] = useState<ComparableType[][]>([]);
