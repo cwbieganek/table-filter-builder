@@ -66,6 +66,47 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			<h2 className={styles.centerText}>{title}</h2>
 		);
 	}
+
+	function renderFieldSelect() {
+		return (
+			<div className={styles.row}>
+				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
+					<option value="">Choose a field...</option>
+					{fields.map((field, i) => {
+						return <option key={i} value={field.name}>{field.name}</option>;
+					})}
+				</HTMLSelect>
+			</div>
+		);
+	}
+
+	function renderComparisonOperatorSelect() {
+		return (
+			<div className={styles.row}>
+				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
+					<option value="">Choose a comparison...</option>
+					{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
+						return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
+					})}
+				</HTMLSelect>
+			</div>
+		);
+	}
+
+	function renderAddComparisonButton() {
+		return (
+			<div className={styles.row}>
+				<Button icon="add" onClick={() => {
+					let rowComparison: RowComparison = {
+						fieldName: selectedFieldName,
+						comparison: selectedComparisonOperator as ComparisonOperator,
+						value: "TODO"
+					};
+					onComparisonCreated(rowComparison);
+				}}>Create Filter</Button>
+			</div>
+		);
+	}
 	// #endregion
 
 	// #region Event Handlers
@@ -81,32 +122,9 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	return (
 		<div className={styles.container}>
 			{ title && renderTitle() }
-			<div className={styles.row}>
-				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
-					<option value="">Choose a field...</option>
-					{fields.map((field, i) => {
-						return <option key={i} value={field.name}>{field.name}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>
-				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
-					<option value="">Choose a comparison...</option>
-					{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
-						return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>
-				<Button icon="add" onClick={() => {
-					let rowComparison: RowComparison = {
-						fieldName: selectedFieldName,
-						comparison: selectedComparisonOperator as ComparisonOperator,
-						value: "TODO"
-					};
-					onComparisonCreated(rowComparison);
-				}}>Create Filter</Button>
-			</div>
+			{ renderFieldSelect() }
+			{ renderComparisonOperatorSelect() }
+			{ renderAddComparisonButton() }
 		</div>
 	);
 };
