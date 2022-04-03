@@ -44,7 +44,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 function renderComparisonSummaries(comparisons: RowComparison[]) {
-	return comparisons.map((comparison, i) => {
+	const comparisonSummaries = comparisons.map((comparison, i) => {
 		return (
 			<ComparisonSummary 
 				key={i + 1} 
@@ -54,6 +54,8 @@ function renderComparisonSummaries(comparisons: RowComparison[]) {
 				num={i + 1} />
 		);
 	});
+
+	return (<div className={styles.comparisonSummariesContainer}>{comparisonSummaries}</div>);
 }
 
 /**
