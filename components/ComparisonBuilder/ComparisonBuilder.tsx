@@ -106,7 +106,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 						value: "TODO"
 					};
 					onComparisonCreated(rowComparison);
-				}}>Create Filter</Button>
+				}}>Add Comparison</Button>
 			</div>
 		);
 	}
