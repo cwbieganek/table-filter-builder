@@ -15,6 +15,8 @@ import type { RowComparison } from "../../modules/Filter/RowFilter";
 import styles from './ComparisonBuilder.module.css';
 // #endregion
 
+export type FieldType = "TEXT" | "NUMBER" | "DATE";
+
 // #region Interfaces
 /**
  * Represents a field/column in a table.
@@ -28,7 +30,7 @@ export interface IField {
 	/**
 	 * The type of the column (text, number, etc.).
 	 */
-	type: "TEXT" | "NUMBER" | "DATE";
+	type: FieldType;
 }
 
 export interface IProps extends React.HTMLProps<HTMLDivElement> {
@@ -106,6 +108,10 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 				}}>Create Filter</Button>
 			</div>
 		);
+	}
+
+	function renderComparisonValueInput(fieldType: string) {
+		
 	}
 	// #endregion
 
