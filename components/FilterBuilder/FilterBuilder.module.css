@@ -6,6 +6,7 @@
 .comparisonSummariesContainer {
 	display: flex;
 	margin-left: 1rem;
+	flex-direction: column;
 }
 
 .row {

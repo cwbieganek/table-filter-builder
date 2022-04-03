@@ -1,8 +1,10 @@
 .comparisonSummary {
-	padding: 1rem;
+	padding: 0.5rem;
 	border-radius: 4px;
 	border: 1px solid white;
 	background-color: #383e47; /* Same as .bp4-dark .bp4-card */
+	height: fit-content;
+	margin-bottom: 1rem;
 }
 
 h3 {
