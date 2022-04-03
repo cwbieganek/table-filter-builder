@@ -59,6 +59,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
 	// #region Component State
 	let [ selectedFieldName, setSelectedFieldName ] = useState("");
+	let [ selectedFieldType, setSelectedFieldType ] = useState<FieldType | null>(null);
 	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
 	// #endregion
 	
@@ -110,14 +111,30 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 		);
 	}
 
-	function renderComparisonValueInput(fieldType: string) {
-		
+	function renderComparisonValueInput(fieldType: FieldType) {
+		switch (fieldType) {
+			case "DATE":
+				return (<div className="row">Date</div>);
+			case "NUMBER":
+				return (<div className="row">Number</div>);
+			case "TEXT":
+				return (<div className="row">Text</div>);
+		}
 	}
 	// #endregion
 
 	// #region Event Handlers
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedFieldName(event.currentTarget.value);
+		let selectedValue = event.currentTarget.value;
+
+		setSelectedFieldName(selectedValue);
+
+		for (const field of fields) {
+			if (field.name === selectedValue) {
+				setSelectedFieldType(field.type);
+				break;
+			}
+		}
 	}
 
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -130,6 +147,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			{ title && renderTitle() }
 			{ renderFieldSelect() }
 			{ renderComparisonOperatorSelect() }
+			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType) : null }
 			{ renderAddComparisonButton() }
 		</div>
 	);
