@@ -4,12 +4,14 @@ import React from 'react';
 import { useState } from 'react';
 
 // Blueprint JS components
-import { Button, HTMLSelect } from '@blueprintjs/core';
+import { Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
+import { DateInput } from '@blueprintjs/datetime';
 
 // Custom modules
 import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
 import type { ComparisonOperator } from '../../modules/Logic/Operators';
 import type { RowComparison } from "../../modules/Filter/RowFilter";
+import type { ComparableType } from '../../modules/Logic/LogicalExpression';
 
 // Custom CSS
 import styles from './ComparisonBuilder.module.css';
@@ -58,9 +60,10 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
  */
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
 	// #region Component State
-	let [ selectedFieldName, setSelectedFieldName ] = useState("");
-	let [ selectedFieldType, setSelectedFieldType ] = useState<FieldType | null>(null);
-	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
+	const [ selectedFieldName, setSelectedFieldName ] = useState<string | undefined>();
+	const [ selectedFieldType, setSelectedFieldType ] = useState<FieldType | undefined>();
+	const [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState<ComparisonOperator | undefined>();
+	const [ selectedComparisonValue, setSelectedComparisonValue ] = useState<ComparableType | undefined>();
 	// #endregion
 	
 	// #region Local Renderers
@@ -100,26 +103,53 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 		return (
 			<div className={styles.row}>
 				<Button icon="add" onClick={() => {
+					if (!selectedComparisonValue || !selectedFieldName || !selectedComparisonOperator) {
+						return;
+					}
+
 					let rowComparison: RowComparison = {
 						fieldName: selectedFieldName,
-						comparison: selectedComparisonOperator as ComparisonOperator,
-						value: "TODO"
+						comparison: selectedComparisonOperator,
+						value: selectedComparisonValue
 					};
+
 					onComparisonCreated(rowComparison);
 				}}>Add Comparison</Button>
 			</div>
 		);
 	}
 
-	function renderComparisonValueInput(fieldType: FieldType) {
+	function renderComparisonValueInput(
+		fieldType: FieldType, 
+		onValueChange: (v: ComparableType) => void) {
+		let input: JSX.Element;
+
+		function onDateChange(selectedDate: Date, isUserChange: boolean) {
+			onValueChange(selectedDate);
+		}
+
+		function onNumberChange(valueAsNumber: number, valueAsString: string, inputElement: HTMLInputElement) {
+			onValueChange(valueAsNumber);
+		}
+
 		switch (fieldType) {
 			case "DATE":
-				return (<div className="row">Date</div>);
+				input = <DateInput onChange={onDateChange} />;
+				break;
 			case "NUMBER":
-				return (<div className="row">Number</div>);
+				input = <NumericInput min={1} onValueChange={onNumberChange}/>;
+				break;
 			case "TEXT":
-				return (<div className="row">Text</div>);
+				input = <EditableText minWidth={148} onChange={onValueChange} />;
+				break;
 		}
+
+		return (
+			<div className={styles.row}>
+				<	div>Comparison Value:</div>
+				{ input }
+			</div>
+		);
 	}
 	// #endregion
 
@@ -138,7 +168,22 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	}
 
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedComparisonOperator(event.currentTarget.value);
+		setSelectedComparisonOperator(event.currentTarget.value as ComparisonOperator);
+	}
+
+	function onComparisonValueChange(v: ComparableType) {
+		switch (typeof v) {
+			case "string":
+				setSelectedComparisonValue(v);
+				break;
+			case "number":
+				setSelectedComparisonValue(v);
+			case "object":
+				setSelectedComparisonValue(v as Date);
+				break;
+			default:
+				throw new Error(`${v} is not a ComparableType.`);
+		}
 	}
 	// #endregion
 
@@ -147,7 +192,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			{ title && renderTitle() }
 			{ renderFieldSelect() }
 			{ renderComparisonOperatorSelect() }
-			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType) : null }
+			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType, onComparisonValueChange) : null }
 			{ renderAddComparisonButton() }
 		</div>
 	);
