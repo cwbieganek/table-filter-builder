@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Blueprint JS
 import { Card, Elevation } from '@blueprintjs/core';
@@ -11,6 +11,10 @@ import type { RowComparison } from '../../modules/Filter/RowFilter';
 
 // Custom components
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
+import ComparisonSummary from '../ComparisonSummary/ComparisonSummary';
+
+// Custom CSS
+import styles from './FilterBuilder.module.css';
 
 /**
  * Represents a field/column in a table.
@@ -39,20 +43,37 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
+function renderComparisonSummaries(comparisons: RowComparison[]) {
+	return comparisons.map((comparison, i) => {
+		return (
+			<ComparisonSummary 
+				key={i + 1} 
+				fieldName={comparison.fieldName} 
+				comparisonOperator={comparison.comparison} 
+				comparisonValue={comparison.value}
+				num={i + 1} />
+		);
+	});
+}
+
 /**
  * A component for creating multiple row comparisons that can be used to filter
  * the contents of a table.
  */
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
+	const [ comparisons, setComparisons ] = useState<RowComparison[]>([]);
+
 	function onComparisonCreated(rowComparison: RowComparison) {
-		console.log("A row comparison was created:");
-		console.log(rowComparison);
+		setComparisons([...comparisons, rowComparison]);
 	}
 
 	return (
-		<Card elevation={Elevation.TWO}>
-			<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
-		</Card>
+		<div className={styles.filterBuilderContainer}>
+			<Card elevation={Elevation.TWO}>
+				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
+			</Card>
+			{ comparisons ? renderComparisonSummaries(comparisons) : null }
+		</div>
 	);
 };
 
