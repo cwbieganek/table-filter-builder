@@ -7,9 +7,14 @@ import { Icon } from '@blueprintjs/core';
 // Custom types
 import type { ComparisonOperator } from '../../modules/Logic/Operators';
 import type { ComparableType } from '@/modules/Logic/LogicalExpression';
+import type { RowComparison } from '@/modules/Filter/RowFilter';
 
 // Custom CSS
 import styles from './ComparisonSummary.module.css';
+
+export interface IRowComparisonWithNum extends RowComparison {
+	num: number
+}
 
 export interface IComparisonSummaryProps {
 	fieldName: string,

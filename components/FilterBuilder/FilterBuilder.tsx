@@ -13,6 +13,9 @@ import type { RowComparison } from '../../modules/Filter/RowFilter';
 import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
 import ComparisonSummary from '../ComparisonSummary/ComparisonSummary';
 
+// Custom types
+import type { IRowComparisonWithNum } from '../ComparisonSummary/ComparisonSummary';
+
 // Custom CSS
 import styles from './FilterBuilder.module.css';
 
@@ -43,15 +46,15 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	onFilterCreate?: (rowFilter: RowFilter) => void;
 }
 
-function renderComparisonSummaries(comparisons: RowComparison[], onDelete: () => void) {
+function renderComparisonSummaries(comparisons: IRowComparisonWithNum[], onDelete: () => void) {
 	const comparisonSummaries = comparisons.map((comparison, i) => {
 		return (
 			<ComparisonSummary 
-				key={i + 1} 
+				key={comparison.num} 
 				fieldName={comparison.fieldName} 
 				comparisonOperator={comparison.comparison} 
 				comparisonValue={comparison.value}
-				num={i + 1}
+				num={comparison.num}
 				onDelete={onDelete} />
 		);
 	});
@@ -64,10 +67,21 @@ function renderComparisonSummaries(comparisons: RowComparison[], onDelete: () =>
  * the contents of a table.
  */
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
-	const [ comparisons, setComparisons ] = useState<RowComparison[]>([]);
+	const [ comparisons, setComparisons ] = useState<IRowComparisonWithNum[]>([]);
 
 	function onComparisonCreate(rowComparison: RowComparison) {
-		setComparisons([...comparisons, rowComparison]);
+		let rowComparisonWithNum: IRowComparisonWithNum = {
+			fieldName: rowComparison.fieldName,
+			comparison: rowComparison.comparison,
+			value: rowComparison.value,
+			num: comparisons.length + 1
+		}
+
+		if (!comparisons) {
+			setComparisons([rowComparisonWithNum]);
+		}
+
+		setComparisons([...comparisons, rowComparisonWithNum]);
 	}
 
 	function onComparisonDelete() {
