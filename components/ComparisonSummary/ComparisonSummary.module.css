@@ -18,3 +18,8 @@ h3 {
 	top: 2px;
 	right: 2px;
 }
+
+.iconContainer:hover {
+	/* color: #8abbff; Dark theme primary*/
+	color: red;
+}
