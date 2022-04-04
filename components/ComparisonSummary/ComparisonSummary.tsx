@@ -30,7 +30,7 @@ export default function ComparisonSummary ({ fieldName, comparisonOperator, comp
 			<div className={styles.iconContainer} onClick={() => { onDelete(num) }}>
 				<Icon icon="cross" />
 			</div>
-			<h3>Comparison #{num}</h3>
+			<h3 className={styles.h3}>Comparison #{num}</h3>
 			<div>{`${fieldName} ${comparisonOperator} ${comparisonValue}`}</div>
 		</div>
 	);
