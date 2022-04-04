@@ -15,13 +15,14 @@ export interface IComparisonSummaryProps {
 	fieldName: string,
 	comparisonOperator: ComparisonOperator,
 	comparisonValue: ComparableType,
-	num: number
+	num: number,
+	onDelete: () => void
 }
 
-export default function ComparisonSummary ({ fieldName, comparisonOperator, comparisonValue, num }: IComparisonSummaryProps) {
+export default function ComparisonSummary ({ fieldName, comparisonOperator, comparisonValue, num, onDelete }: IComparisonSummaryProps) {
 	return (
 		<div className={styles.comparisonSummary}>
-			<div className={styles.iconContainer}>
+			<div className={styles.iconContainer} onClick={onDelete}>
 				<Icon icon="cross" />
 			</div>
 			<h3>Comparison #{num}</h3>

@@ -19,5 +19,6 @@ Example.args = {
 	fieldName: "Salary",
 	comparisonOperator: ">",
 	comparisonValue: 100000,
-	num: 1
+	num: 1,
+	onDelete: () => { console.log(`Comparison summary #${1} delete button clicked.`); }
 };
