@@ -21,13 +21,13 @@ export interface IComparisonSummaryProps {
 	comparisonOperator: ComparisonOperator,
 	comparisonValue: ComparableType,
 	num: number,
-	onDelete: () => void
+	onDelete: (num: number) => void
 }
 
 export default function ComparisonSummary ({ fieldName, comparisonOperator, comparisonValue, num, onDelete }: IComparisonSummaryProps) {
 	return (
 		<div className={styles.comparisonSummary}>
-			<div className={styles.iconContainer} onClick={onDelete}>
+			<div className={styles.iconContainer} onClick={() => { onDelete(num) }}>
 				<Icon icon="cross" />
 			</div>
 			<h3>Comparison #{num}</h3>

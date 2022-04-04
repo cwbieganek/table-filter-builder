@@ -46,7 +46,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	onFilterCreate?: (rowFilter: RowFilter) => void;
 }
 
-function renderComparisonSummaries(comparisons: IRowComparisonWithNum[], onDelete: () => void) {
+function renderComparisonSummaries(comparisons: IRowComparisonWithNum[], onDelete: (num: number) => void) {
 	const comparisonSummaries = comparisons.map((comparison, i) => {
 		return (
 			<ComparisonSummary 
@@ -84,8 +84,10 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 		setComparisons([...comparisons, rowComparisonWithNum]);
 	}
 
-	function onComparisonDelete() {
-		console.log("A comparison was deleted.");
+	function onComparisonDelete(num: number) {
+		setComparisons(comparisons.filter((comparison) => {
+			return comparison.num != num;
+		}));
 	}
 
 	return (
