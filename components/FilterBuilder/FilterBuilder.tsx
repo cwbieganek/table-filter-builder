@@ -43,7 +43,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	onFilterCreated?: (rowFilter: RowFilter) => void;
 }
 
-function renderComparisonSummaries(comparisons: RowComparison[]) {
+function renderComparisonSummaries(comparisons: RowComparison[], onDelete: () => void) {
 	const comparisonSummaries = comparisons.map((comparison, i) => {
 		return (
 			<ComparisonSummary 
@@ -51,7 +51,8 @@ function renderComparisonSummaries(comparisons: RowComparison[]) {
 				fieldName={comparison.fieldName} 
 				comparisonOperator={comparison.comparison} 
 				comparisonValue={comparison.value}
-				num={i + 1} />
+				num={i + 1}
+				onDelete={onDelete} />
 		);
 	});
 
@@ -69,12 +70,16 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 		setComparisons([...comparisons, rowComparison]);
 	}
 
+	function onComparisonDelete() {
+		console.log("A comparison was deleted.");
+	}
+
 	return (
 		<div className={styles.filterBuilderContainer}>
 			<Card elevation={Elevation.TWO}>
 				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
 			</Card>
-			{ comparisons ? renderComparisonSummaries(comparisons) : null }
+			{ comparisons ? renderComparisonSummaries(comparisons, onComparisonDelete) : null }
 		</div>
 	);
 };
