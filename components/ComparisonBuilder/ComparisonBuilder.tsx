@@ -102,22 +102,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	function renderAddComparisonButton() {
 		return (
 			<div className={styles.row}>
-				<Button icon="add" onClick={() => {
-					if (!validateInputs()) {
-						alert("All parameters must be entered.");
-						return;
-					}
-
-					// Inputs will all be valid at this point, so it is safe to typecast the values
-					// in order to make TypeScript happy.
-					let rowComparison: RowComparison = {
-						fieldName: selectedFieldName as string,
-						comparison: selectedComparisonOperator as ComparisonOperator,
-						value: selectedComparisonValue as ComparableType
-					};
-
-					onComparisonCreated(rowComparison);
-				}}>Add Comparison</Button>
+				<Button icon="add" onClick={onAddComparisonButtonClick}>Add Comparison</Button>
 			</div>
 		);
 	}
@@ -187,6 +172,23 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			default:
 				throw new Error(`${v} is not a ComparableType.`);
 		}
+	}
+
+	function onAddComparisonButtonClick() {
+		if (!validateInputs()) {
+			alert("All parameters must be entered.");
+			return;
+		}
+
+		// Inputs will all be valid at this point, so it is safe to typecast the values
+		// in order to make TypeScript happy.
+		let rowComparison: RowComparison = {
+			fieldName: selectedFieldName as string,
+			comparison: selectedComparisonOperator as ComparisonOperator,
+			value: selectedComparisonValue as ComparableType
+		};
+
+		onComparisonCreated(rowComparison);
 	}
 	// #endregion
 
