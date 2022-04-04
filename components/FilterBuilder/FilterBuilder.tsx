@@ -40,7 +40,7 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	/**
 	 * Callback that will be executed when the user creates a filter.
 	 */
-	onFilterCreated?: (rowFilter: RowFilter) => void;
+	onFilterCreate?: (rowFilter: RowFilter) => void;
 }
 
 function renderComparisonSummaries(comparisons: RowComparison[], onDelete: () => void) {
@@ -66,7 +66,7 @@ function renderComparisonSummaries(comparisons: RowComparison[], onDelete: () =>
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 	const [ comparisons, setComparisons ] = useState<RowComparison[]>([]);
 
-	function onComparisonCreated(rowComparison: RowComparison) {
+	function onComparisonCreate(rowComparison: RowComparison) {
 		setComparisons([...comparisons, rowComparison]);
 	}
 
@@ -77,7 +77,7 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 	return (
 		<div className={styles.filterBuilderContainer}>
 			<Card elevation={Elevation.TWO}>
-				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreated}></ComparisonBuilder>
+				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreate}></ComparisonBuilder>
 			</Card>
 			{ comparisons ? renderComparisonSummaries(comparisons, onComparisonDelete) : null }
 		</div>
