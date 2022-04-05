@@ -1,10 +1,10 @@
 // #region Imports
 // React
 import React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 // Blueprint JS components
-import { Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
+import { Alert, Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
 import { DateInput } from '@blueprintjs/datetime';
 
 // Custom modules
@@ -64,8 +64,9 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	const [ selectedFieldType, setSelectedFieldType ] = useState<FieldType | undefined>();
 	const [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState<ComparisonOperator | undefined>();
 	const [ selectedComparisonValue, setSelectedComparisonValue ] = useState<ComparableType | undefined>();
+	const [ showInvalidInputAlert, setShowInvalidInputAlert ] = useState(false);
 	// #endregion
-	
+
 	// #region Local Renderers
 	function renderTitle() {
 		return (
@@ -176,7 +177,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 
 	function onAddComparisonButtonClick() {
 		if (!validateInputs()) {
-			alert("All parameters must be entered.");
+			setShowInvalidInputAlert(true);
 			return;
 		}
 
@@ -205,6 +206,16 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			{ renderComparisonOperatorSelect() }
 			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType, onComparisonValueChange) : null }
 			{ renderAddComparisonButton() }
+			<div></div>
+			<Alert 
+				isOpen={showInvalidInputAlert} 
+				confirmButtonText="Okay" 
+				icon="warning-sign"
+				intent="warning" 
+				portalContainer={document.getElementById("app-container") as HTMLElement}
+				onConfirm={() => { setShowInvalidInputAlert(false); }}>
+				One or more of the comparison parameters is invalid.
+			</Alert>
 		</div>
 	);
 };
