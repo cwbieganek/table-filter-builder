@@ -20,7 +20,9 @@ export const decorators = [
 	(Story) => {
 		return (
 			<DarkThemeProvider>
-				<Story />
+				<div id="app-container">
+					<Story />
+				</div>
 			</DarkThemeProvider>
 		);
 	}
