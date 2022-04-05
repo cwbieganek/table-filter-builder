@@ -1,7 +1,7 @@
 // #region Imports
 // React
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Blueprint JS components
 import { Alert, Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
@@ -65,6 +65,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	const [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState<ComparisonOperator | undefined>();
 	const [ selectedComparisonValue, setSelectedComparisonValue ] = useState<ComparableType | undefined>();
 	const [ showInvalidInputAlert, setShowInvalidInputAlert ] = useState(false);
+	const [ portalContainer, setPortalContainer ] = useState<HTMLElement | undefined>();
 	// #endregion
 
 	// #region Local Renderers
@@ -140,6 +141,20 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			</div>
 		);
 	}
+
+	function renderAlert() {
+		return (
+			<Alert 
+				isOpen={showInvalidInputAlert} 
+				confirmButtonText="Okay" 
+				icon="warning-sign"
+				intent="warning" 
+				portalContainer={document.getElementById("app-container") as HTMLElement}
+				onConfirm={() => { setShowInvalidInputAlert(false); }}>
+				One or more of the comparison parameters is invalid.
+			</Alert>
+		);
+	}
 	// #endregion
 
 	// #region Event Handlers
@@ -199,6 +214,11 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	}
 	// #endregion
 
+	// Client-side code to be run only once
+	useEffect(() => {
+		setPortalContainer(document.getElementById("app-container") as HTMLElement);
+	});
+
 	return (
 		<div className={styles.container}>
 			{ title && renderTitle() }
@@ -206,16 +226,7 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 			{ renderComparisonOperatorSelect() }
 			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType, onComparisonValueChange) : null }
 			{ renderAddComparisonButton() }
-			<div></div>
-			<Alert 
-				isOpen={showInvalidInputAlert} 
-				confirmButtonText="Okay" 
-				icon="warning-sign"
-				intent="warning" 
-				portalContainer={document.getElementById("app-container") as HTMLElement}
-				onConfirm={() => { setShowInvalidInputAlert(false); }}>
-				One or more of the comparison parameters is invalid.
-			</Alert>
+			{ portalContainer ? renderAlert() : null }
 		</div>
 	);
 };
