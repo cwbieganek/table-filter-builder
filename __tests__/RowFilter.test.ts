@@ -1,4 +1,5 @@
-import { RowMappedType, RowComparison, RowFilter } from "../modules/Filter/RowFilter";
+import { RowComparison, RowFilter } from "../modules/Filter/RowFilter";
+import type { RowMappedType } from '../modules/Filter/RowFilter';
 
 describe('RowFilter', () => {
 	describe('evaluateRow()', () => {

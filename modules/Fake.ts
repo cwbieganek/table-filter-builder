@@ -1,4 +1,4 @@
-import { ComparableType } from "./Logic/LogicalExpression";
+import type { ComparableType } from "./Logic/LogicalExpression";
 
 export type FakeRecord = {
 	firstName: string;
@@ -126,6 +126,6 @@ export function getFake2dArray(): Promise<ComparableType[][]> {
 		// Wait half a second before resolving
 		setTimeout(() => {
 			resolve(fakeRows);
-		}, 4000);
+		}, 2000);
 	});
 }

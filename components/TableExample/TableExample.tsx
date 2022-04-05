@@ -1,10 +1,16 @@
-import { HotkeysProvider } from "@blueprintjs/core";
-import { Cell, CellRenderer, Column, ColumnLoadingOption, ICellProps, Table2 } from "@blueprintjs/table";
-import { FakeRecord, getFake2dArray } from "@/modules/Fake";
-import { ComparableType } from "@/modules/Logic/LogicalExpression";
-import React, { ReactElement } from "react";
+// React
+import React from "react";
+import type { ReactElement } from "react"; 
 import { useState, useEffect } from "react";
-import { render } from "@testing-library/react";
+
+// Blueprint
+import { HotkeysProvider } from "@blueprintjs/core";
+import { Cell, Column, Table2 } from "@blueprintjs/table";
+import type { ICellProps } from "@blueprintjs/table";
+
+// Custom modules
+import { getFake2dArray } from "../../modules/Fake";
+import { ComparableType } from "../../modules/Logic/LogicalExpression";
 
 const TableExample: React.FC<{}> = () => {
 	const [fakeRows, setFakeRows] = useState<ComparableType[][]>([]);

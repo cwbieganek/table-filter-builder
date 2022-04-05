@@ -1,12 +1,22 @@
-import React from 'react';
-import { useState } from 'react';
+// React
+import React, { useState } from 'react';
 
-import { Button, Card, Elevation, HTMLSelect } from '@blueprintjs/core';
+// Blueprint JS
+import { Card, Elevation } from '@blueprintjs/core';
 
-import { COMPARISON_OPERATORS } from '../../modules/Logic/Operators';
-import { RowMappedType, RowComparison, RowFilter } from "../../modules/Filter/RowFilter";
 
-// CSS
+// Custom Modules
+import { RowFilter } from "../../modules/Filter/RowFilter";
+import type { RowComparison } from '../../modules/Filter/RowFilter';
+
+// Custom components
+import ComparisonBuilder from '../ComparisonBuilder/ComparisonBuilder';
+import ComparisonSummary from '../ComparisonSummary/ComparisonSummary';
+
+// Custom types
+import type { IRowComparisonWithNum } from '../ComparisonSummary/ComparisonSummary';
+
+// Custom CSS
 import styles from './FilterBuilder.module.css';
 
 /**
@@ -31,51 +41,62 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	fields: IField[];
 
 	/**
-	 * Callback that will be expected when the user creates a filter.
+	 * Callback that will be executed when the user creates a filter.
 	 */
-	onFilterCreated?: (rowFilter: RowFilter) => void;
+	onFilterCreate?: (rowFilter: RowFilter) => void;
 }
 
+function renderComparisonSummaries(comparisons: IRowComparisonWithNum[], onDelete: (num: number) => void) {
+	const comparisonSummaries = comparisons.map((comparison, i) => {
+		return (
+			<ComparisonSummary 
+				key={comparison.num} 
+				fieldName={comparison.fieldName} 
+				comparisonOperator={comparison.comparison} 
+				comparisonValue={comparison.value}
+				num={comparison.num}
+				onDelete={onDelete} />
+		);
+	});
+
+	return (<div className={styles.comparisonSummariesContainer}>{comparisonSummaries}</div>);
+}
+
+/**
+ * A component for creating multiple row comparisons that can be used to filter
+ * the contents of a table.
+ */
 const FilterBuilder: React.FC<IProps> = ({ fields }) => {
-	let [ selectedFieldName, setSelectedFieldName ] = useState("");
+	const [ comparisons, setComparisons ] = useState<IRowComparisonWithNum[]>([]);
 
-	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedFieldName(event.currentTarget.value);
+	function onComparisonCreate(rowComparison: RowComparison) {
+		let rowComparisonWithNum: IRowComparisonWithNum = {
+			fieldName: rowComparison.fieldName,
+			comparison: rowComparison.comparison,
+			value: rowComparison.value,
+			num: comparisons.length + 1
+		}
+
+		if (!comparisons) {
+			setComparisons([rowComparisonWithNum]);
+		}
+
+		setComparisons([...comparisons, rowComparisonWithNum]);
 	}
 
-	let [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState("");
-
-	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedComparisonOperator(event.currentTarget.value);
-	}
-
-	function onCreateFilterButtonClick(event: React.MouseEvent<HTMLElement>) {
-		alert("Create Filter button was clicked.");
+	function onComparisonDelete(num: number) {
+		setComparisons(comparisons.filter((comparison) => {
+			return comparison.num != num;
+		}));
 	}
 
 	return (
-		<Card elevation={Elevation.TWO}>
-			<h2 className={styles.centerText}>Filter Builder</h2>
-			<div className={styles.row}>
-				<HTMLSelect onChange={onFieldNameSelectChange} defaultValue="">
-					<option value="">Choose a field...</option>
-					{fields.map((field, i) => {
-						return <option key={i} value={field.name}>{field.name}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>Selected field name: {selectedFieldName}</div>
-			<div className={styles.row}>
-				<HTMLSelect onChange={onComparisonOperatorSelectChange} defaultValue="">
-					<option value="">Choose a comparison...</option>
-					{COMPARISON_OPERATORS.map((comparisonOperator, i) => {
-						return <option key={i} value={comparisonOperator}>{comparisonOperator}</option>;
-					})}
-				</HTMLSelect>
-			</div>
-			<div className={styles.row}>Selected comparison: {selectedComparisonOperator}</div>
-			<Button icon="add" onClick={onCreateFilterButtonClick}>Create Filter</Button>
-		</Card>
+		<div className={styles.filterBuilderContainer}>
+			<Card elevation={Elevation.TWO}>
+				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreate}></ComparisonBuilder>
+			</Card>
+			{ comparisons ? renderComparisonSummaries(comparisons, onComparisonDelete) : null }
+		</div>
 	);
 };
 

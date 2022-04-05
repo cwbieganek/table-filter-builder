@@ -1,6 +1,6 @@
-import { ComparisonOperator } from '../Logic/Operators';
 import LogicalExpression from '../Logic/LogicalExpression';
-import { ComparableType } from '../Logic/LogicalExpression';
+import type { ComparisonOperator } from '../Logic/Operators';
+import type { ComparableType } from '../Logic/LogicalExpression';
 
 /**
  * Maps a field name to a ComparableType, which is the value of field.

@@ -1,4 +1,4 @@
-import { ComparisonOperator } from "./Operators";
+import type { ComparisonOperator } from "./Operators";
 
 export type ComparableType = string | number | Date;
 
