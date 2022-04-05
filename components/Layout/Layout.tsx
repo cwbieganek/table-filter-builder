@@ -12,7 +12,7 @@ import styles from './Layout.module.css';
 const TableExample: React.FC<{}> = ({ children }) => {
 	return(
 		<DarkThemeProvider>
-			<div className={styles.container}>
+			<div id="app-container" className={styles.container}>
 				<header className={styles.header}>
 					<Navbar>
 						<NavbarGroup align={Alignment.CENTER}>
