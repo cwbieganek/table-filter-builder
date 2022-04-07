@@ -1,7 +1,7 @@
 // #region Imports
 // React
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 // Blueprint JS components
 import { Alert, Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
@@ -51,7 +51,25 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	 */
 	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
+
+interface State {
+	selectedFieldName?: string,
+	selectedFieldType?: FieldType,
+	selectedComparisonOperator?: ComparisonOperator,
+	selectedComparisonValue?: ComparableType,
+	showInvalidInputAlert: boolean,
+	portalContainer?: HTMLElement
+}
 // #endregion
+
+enum Action {
+	SET_FIELD_NAME,
+	SET_FIELD_TYPE,
+	SET_COMPARISON_OPERATOR,
+	SET_COMPARISON_VALUE,
+	SET_SHOW_INVALID_INPUT_ALERT,
+	SET_PORTAL_CONTAINER
+}
 
 // #region Component
 /**
@@ -66,7 +84,17 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	const [ selectedComparisonValue, setSelectedComparisonValue ] = useState<ComparableType | undefined>();
 	const [ showInvalidInputAlert, setShowInvalidInputAlert ] = useState(false);
 	const [ portalContainer, setPortalContainer ] = useState<HTMLElement | undefined>();
+
+	const initialState: State = { showInvalidInputAlert: false };
+	const [ state, dispatch ] = useReducer(reducer, initialState);
+
+	function reducer(state: State, action: Action) {
+
+	}
+
 	// #endregion
+
+
 
 	// #region Local Renderers
 	function renderTitle() {
