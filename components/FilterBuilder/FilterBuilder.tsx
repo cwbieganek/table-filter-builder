@@ -77,15 +77,16 @@ const FilterBuilder: React.FC<IProps> = ({ fields, onFilterCreate }) => {
 	const [ comparisons, setComparisons ] = useState<IRowComparisonWithNum[]>([]);
 
 	function onComparisonCreate(rowComparison: RowComparison) {
+		if (comparisons.length === fields.length) {
+			// Cannot have more comparisons than fields.
+			return;
+		}
+
 		let rowComparisonWithNum: IRowComparisonWithNum = {
 			fieldName: rowComparison.fieldName,
 			comparison: rowComparison.comparison,
 			value: rowComparison.value,
 			num: comparisons.length + 1
-		}
-
-		if (!comparisons) {
-			setComparisons([rowComparisonWithNum]);
 		}
 
 		setComparisons([...comparisons, rowComparisonWithNum]);
