@@ -9,7 +9,6 @@ import '../node_modules/@blueprintjs/table/lib/css/table.css';
 import '../node_modules/@blueprintjs/datetime/lib/css/blueprint-datetime.css';
 
 // Custom components
-import Greeting from '@/components/Greeting/Greeting';
 import FilterBuilder from '@/components/FilterBuilder/FilterBuilder';
 import TableExample from '@/components/TableExample/TableExample';
 
@@ -89,8 +88,6 @@ export default function Home() {
 				<title>Table Filter Builder</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			<Greeting firstName='Chris' lastName='Bieganek' />
 
 			<div className={styles.filterBuilderContainer}>
 				<FilterBuilder fields={[
