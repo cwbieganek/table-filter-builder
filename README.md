@@ -1,23 +1,9 @@
-# Next.js + Jest
+# Table Filter Builder
 
-This example shows how to configure Jest to work with Next.js.
+This demo application allows you to construct a table filter by creating one or more comparisons. Once you have created at least one comparison, you can click the "Apply Filter" button to filter the table.
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+# Technologies
 
-## How to Use
-
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
-
-In your terminal, run the following command:
-
-```bash
-npx create-next-app --example with-jest with-jest-app
-# or
-yarn create next-app --example with-jest with-jest-app
-```
-
-## Run Jest Tests
-
-```bash
-npm test
-```
+- Next.js
+- TypeScript
+- Blueprint JS
