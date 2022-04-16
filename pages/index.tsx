@@ -38,7 +38,6 @@ function renderLoading() {
 export default function Home() {
 	const [fakeRows, setFakeRows] = useState<ComparableType[][]>([]);
 	const [filteredRows, setFilteredRows] = useState<ComparableType[][]>(fakeRows);
-	// const [rowFilter, setRowFilter] = useState<RowFilter | null>(null);
 	const [loadingData, setLoadingData] = useState<boolean>(true);
 
 	const columnNameToIndex: ColumnNameToIndex = {
@@ -66,7 +65,6 @@ export default function Home() {
 			return rowPredicate(row, columnNameToIndex, rowFilter);
 		})
 
-		// setFilteredRows(JSON.parse(JSON.stringify(newRows)));
 		setFilteredRows(newRows);
 	}
 
