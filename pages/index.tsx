@@ -52,8 +52,6 @@ export default function Home() {
 	// Get fake data asynchronously, but only once
 	useEffect(() => {
 		getFake2dArray().then((fakeRows) => {
-			console.log("Got fake data:");
-			console.log(fakeRows);
 			setFakeRows(fakeRows);
 			setFilteredRows(fakeRows);
 			setLoadingData(false);
