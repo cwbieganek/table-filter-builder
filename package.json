@@ -35,6 +35,7 @@
     "babel-loader": "^8.2.4",
     "eslint": "8.5.0",
     "eslint-config-next": "latest",
+    "eslint-plugin-react-hooks": "^4.4.0",
     "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-testing-library": "5.0.1",
     "jest": "27.4.5",

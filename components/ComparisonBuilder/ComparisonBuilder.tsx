@@ -1,7 +1,7 @@
 // #region Imports
 // React
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 // Blueprint JS components
 import { Alert, Button, EditableText, HTMLSelect, NumericInput } from '@blueprintjs/core';
@@ -51,7 +51,70 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
 	 */
 	onComparisonCreated: (rowComparison: RowComparison) => any;
 }
+
+interface State {
+	selectedFieldName?: string;
+	selectedFieldType?: FieldType;
+	selectedComparisonOperator?: ComparisonOperator;
+	comparisonValue?: ComparableType;
+	showInvalidInputAlert: boolean;
+	portalContainer?: HTMLElement;
+}
 // #endregion
+
+type Action = 
+	{ type: ActionType.SET_FIELD_NAME, payload: string } |
+	{ type: ActionType.SET_FIELD_TYPE, payload: FieldType } |
+	{ type: ActionType.SET_COMPARISON_OPERATOR, payload: ComparisonOperator } |
+	{ type: ActionType.SET_COMPARISON_VALUE, payload: ComparableType } |
+	{ type: ActionType.TOGGLE_INVALID_INPUT_ALERT } |
+	{ type: ActionType.SET_PORTAL_CONTAINER, payload: HTMLElement }
+
+enum ActionType {
+	SET_FIELD_NAME,
+	SET_FIELD_TYPE,
+	SET_COMPARISON_OPERATOR,
+	SET_COMPARISON_VALUE,
+	TOGGLE_INVALID_INPUT_ALERT,
+	SET_PORTAL_CONTAINER
+}
+
+function reducer(state: State, action: Action) {
+	switch (action.type) {
+		case ActionType.SET_FIELD_NAME:
+			return {
+				...state,
+				selectedFieldName: action.payload
+			}
+		case ActionType.SET_FIELD_TYPE:
+			return {
+				...state,
+				selectedFieldType: action.payload
+			}
+		case ActionType.SET_COMPARISON_OPERATOR:
+			return {
+				...state,
+				selectedComparisonOperator: action.payload
+			}
+		case ActionType.SET_COMPARISON_VALUE:
+			return {
+				...state,
+				comparisonValue: action.payload
+			}
+		case ActionType.TOGGLE_INVALID_INPUT_ALERT:
+			return {
+				...state,
+				showInvalidInputAlert: !state.showInvalidInputAlert
+			}
+		case ActionType.SET_PORTAL_CONTAINER:
+			return {
+				...state,
+				portalContainer: action.payload
+			}
+		default:
+			return state;
+	}
+}
 
 // #region Component
 /**
@@ -60,13 +123,11 @@ export interface IProps extends React.HTMLProps<HTMLDivElement> {
  */
 const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreated }) => {
 	// #region Component State
-	const [ selectedFieldName, setSelectedFieldName ] = useState<string | undefined>();
-	const [ selectedFieldType, setSelectedFieldType ] = useState<FieldType | undefined>();
-	const [ selectedComparisonOperator, setSelectedComparisonOperator ] = useState<ComparisonOperator | undefined>();
-	const [ selectedComparisonValue, setSelectedComparisonValue ] = useState<ComparableType | undefined>();
-	const [ showInvalidInputAlert, setShowInvalidInputAlert ] = useState(false);
-	const [ portalContainer, setPortalContainer ] = useState<HTMLElement | undefined>();
+	const initialState: State = { showInvalidInputAlert: false };
+	const [ state, dispatch ] = useReducer(reducer, initialState);
 	// #endregion
+
+
 
 	// #region Local Renderers
 	function renderTitle() {
@@ -145,12 +206,12 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	function renderAlert() {
 		return (
 			<Alert 
-				isOpen={showInvalidInputAlert} 
+				isOpen={state.showInvalidInputAlert} 
 				confirmButtonText="Okay" 
 				icon="warning-sign"
 				intent="warning" 
 				portalContainer={document.getElementById("app-container") as HTMLElement}
-				onConfirm={() => { setShowInvalidInputAlert(false); }}>
+				onConfirm={() => { dispatch({ type: ActionType.TOGGLE_INVALID_INPUT_ALERT }) }}>
 				One or more of the comparison parameters is invalid.
 			</Alert>
 		);
@@ -161,29 +222,38 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 	function onFieldNameSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
 		let selectedValue = event.currentTarget.value;
 
-		setSelectedFieldName(selectedValue);
+		dispatch({
+			type: ActionType.SET_FIELD_NAME,
+			payload: selectedValue
+		});
 
 		for (const field of fields) {
 			if (field.name === selectedValue) {
-				setSelectedFieldType(field.type);
+				dispatch({
+					type: ActionType.SET_FIELD_TYPE,
+					payload: field.type
+				});
 				break;
 			}
 		}
 	}
 
 	function onComparisonOperatorSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		setSelectedComparisonOperator(event.currentTarget.value as ComparisonOperator);
+		dispatch({
+			type: ActionType.SET_COMPARISON_OPERATOR,
+			payload: event.currentTarget.value as ComparisonOperator
+		});
 	}
 
 	function onComparisonValueChange(v: ComparableType) {
 		switch (typeof v) {
 			case "string":
-				setSelectedComparisonValue(v);
+				dispatch({ type: ActionType.SET_COMPARISON_VALUE, payload: v });
 				break;
 			case "number":
-				setSelectedComparisonValue(v);
+				dispatch({ type: ActionType.SET_COMPARISON_VALUE, payload: v });
 			case "object":
-				setSelectedComparisonValue(v as Date);
+				dispatch({ type: ActionType.SET_COMPARISON_VALUE, payload: v as Date });
 				break;
 			default:
 				throw new Error(`${v} is not a ComparableType.`);
@@ -192,16 +262,16 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 
 	function onAddComparisonButtonClick() {
 		if (!validateInputs()) {
-			setShowInvalidInputAlert(true);
+			dispatch({ type: ActionType.TOGGLE_INVALID_INPUT_ALERT });
 			return;
 		}
 
 		// Inputs will all be valid at this point, so it is safe to typecast the values
 		// in order to make TypeScript happy.
 		let rowComparison: RowComparison = {
-			fieldName: selectedFieldName as string,
-			comparison: selectedComparisonOperator as ComparisonOperator,
-			value: selectedComparisonValue as ComparableType
+			fieldName: state.selectedFieldName as string,
+			comparison: state.selectedComparisonOperator as ComparisonOperator,
+			value: state.comparisonValue as ComparableType
 		};
 
 		onComparisonCreated(rowComparison);
@@ -210,23 +280,26 @@ const ComparisonBuilder: React.FC<IProps> = ({ fields, title, onComparisonCreate
 
 	// #region Utility Functions
 	function validateInputs() {
-		return selectedFieldType && selectedComparisonOperator && selectedComparisonValue;
+		return state.selectedFieldType && state.selectedComparisonOperator && state.comparisonValue;
 	}
 	// #endregion
 
 	// Client-side code to be run only once
 	useEffect(() => {
-		setPortalContainer(document.getElementById("app-container") as HTMLElement);
-	});
+		dispatch({
+			type: ActionType.SET_PORTAL_CONTAINER,
+			payload: document.getElementById("app-container") as HTMLElement
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>
 			{ title && renderTitle() }
 			{ renderFieldSelect() }
 			{ renderComparisonOperatorSelect() }
-			{ selectedFieldType ? renderComparisonValueInput(selectedFieldType, onComparisonValueChange) : null }
+			{ state.selectedFieldType ? renderComparisonValueInput(state.selectedFieldType, onComparisonValueChange) : null }
 			{ renderAddComparisonButton() }
-			{ portalContainer ? renderAlert() : null }
+			{ state.portalContainer ? renderAlert() : null }
 		</div>
 	);
 };

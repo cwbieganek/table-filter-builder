@@ -1,9 +1,8 @@
 // React
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 
 // Blueprint JS
-import { Card, Elevation } from '@blueprintjs/core';
-
+import { Button, Card, Elevation } from '@blueprintjs/core';
 
 // Custom Modules
 import { RowFilter } from "../../modules/Filter/RowFilter";
@@ -62,23 +61,32 @@ function renderComparisonSummaries(comparisons: IRowComparisonWithNum[], onDelet
 	return (<div className={styles.comparisonSummariesContainer}>{comparisonSummaries}</div>);
 }
 
+function renderApplyFilterButton(onClick: MouseEventHandler) {
+	return (
+		<div className={styles.centerText}>
+			<Button onClick={onClick}>Apply Filter</Button>
+		</div>
+	);
+}
+
 /**
  * A component for creating multiple row comparisons that can be used to filter
  * the contents of a table.
  */
-const FilterBuilder: React.FC<IProps> = ({ fields }) => {
+const FilterBuilder: React.FC<IProps> = ({ fields, onFilterCreate }) => {
 	const [ comparisons, setComparisons ] = useState<IRowComparisonWithNum[]>([]);
 
 	function onComparisonCreate(rowComparison: RowComparison) {
+		if (comparisons.length === fields.length) {
+			// Cannot have more comparisons than fields.
+			return;
+		}
+
 		let rowComparisonWithNum: IRowComparisonWithNum = {
 			fieldName: rowComparison.fieldName,
 			comparison: rowComparison.comparison,
 			value: rowComparison.value,
 			num: comparisons.length + 1
-		}
-
-		if (!comparisons) {
-			setComparisons([rowComparisonWithNum]);
 		}
 
 		setComparisons([...comparisons, rowComparisonWithNum]);
@@ -90,10 +98,19 @@ const FilterBuilder: React.FC<IProps> = ({ fields }) => {
 		}));
 	}
 
+	function onApplyFilterButtonClick() {
+		if (!onFilterCreate) {
+			return;
+		}
+
+		onFilterCreate(new RowFilter(comparisons));
+	}
+
 	return (
 		<div className={styles.filterBuilderContainer}>
 			<Card elevation={Elevation.TWO}>
 				<ComparisonBuilder fields={fields} title="Comparison 1" onComparisonCreated={onComparisonCreate}></ComparisonBuilder>
+				{renderApplyFilterButton(onApplyFilterButtonClick)}
 			</Card>
 			{ comparisons ? renderComparisonSummaries(comparisons, onComparisonDelete) : null }
 		</div>
