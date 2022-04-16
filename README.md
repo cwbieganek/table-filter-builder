@@ -7,3 +7,5 @@ This demo application allows you to construct a table filter by creating one or 
 - Next.js
 - TypeScript
 - Blueprint JS
+
+[Demo](https://table-filter-builder.pages.dev/)
