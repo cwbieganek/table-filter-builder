@@ -30,7 +30,7 @@ export default function Home() {
 					{name: "Age", type: "NUMBER"},
 					{name: "Job Title", type: "TEXT"},
 					{name: "Salary", type: "NUMBER"},
-				    {name: "Tenure", type: "NUMBER"}
+					{name: "Tenure", type: "NUMBER"}
 				]}/>
 			</div>
 			
