@@ -18,8 +18,16 @@ import { getFake2dArray } from "@/modules/Fake";
 
 // Custom types
 import type { ComparableType } from '@/modules/Logic/LogicalExpression';
+import type { RowFilter } from '@/modules/Filter/RowFilter';
+
+// Custom classes
+import LogicalExpression from '@/modules/Logic/LogicalExpression';
 
 import styles from '@/pages/index.module.css';
+
+type ColumnNameToIndex = {
+	[key: string]: number;
+};
 
 function renderLoading() {
 	return(
@@ -29,7 +37,18 @@ function renderLoading() {
 
 export default function Home() {
 	const [fakeRows, setFakeRows] = useState<ComparableType[][]>([]);
+	const [filteredRows, setFilteredRows] = useState<ComparableType[][]>(fakeRows);
+	// const [rowFilter, setRowFilter] = useState<RowFilter | null>(null);
 	const [loadingData, setLoadingData] = useState<boolean>(true);
+
+	const columnNameToIndex: ColumnNameToIndex = {
+		"First Name": 0,
+		"Last Initial": 1,
+		"Age": 2,
+		"Job Title": 3,
+		"Salary": 4,
+		"Tenure": 5
+	};
 
 	// Get fake data asynchronously, but only once
 	useEffect(() => {
@@ -37,9 +56,36 @@ export default function Home() {
 			console.log("Got fake data:");
 			console.log(fakeRows);
 			setFakeRows(fakeRows);
+			setFilteredRows(fakeRows);
 			setLoadingData(false);
 		});
 	}, []);
+
+	function onFilterCreate(rowFilter: RowFilter) {
+		const newRows = fakeRows.filter((row: ComparableType[]) => {
+			return rowPredicate(row, columnNameToIndex, rowFilter);
+		})
+
+		// setFilteredRows(JSON.parse(JSON.stringify(newRows)));
+		setFilteredRows(newRows);
+	}
+
+	function rowPredicate(row: ComparableType[], columnNameToIndex: ColumnNameToIndex, rowFilter: RowFilter): boolean {
+		const logicalExpressions = rowFilter.comparisons.map((rowComparison) => {
+			const fieldValue = row[columnNameToIndex[rowComparison.fieldName]];
+			return new LogicalExpression(fieldValue, rowComparison.value, rowComparison.comparison);
+		});
+
+		return LogicalExpression.evaluateMultiple(logicalExpressions);
+	}
+
+	function renderTable(filteredRows: ComparableType[][]) {
+		if (filteredRows.length === 0) {
+			return;
+		}
+
+		return <TableExample rows={filteredRows} />;
+	}
 
 	return (
 		<>
@@ -58,11 +104,12 @@ export default function Home() {
 					{name: "Job Title", type: "TEXT"},
 					{name: "Salary", type: "NUMBER"},
 					{name: "Tenure", type: "NUMBER"}
-				]}/>
+				]} onFilterCreate={onFilterCreate} />
 			</div>
 			
 			<div className={styles.tableExampleContainer}>
-				{loadingData ? renderLoading() : <TableExample rows={fakeRows}/>}
+				{loadingData ? renderLoading() : null}
+				{renderTable(filteredRows)}
 			</div>
 		</>
 	);

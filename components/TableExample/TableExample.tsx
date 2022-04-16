@@ -14,14 +14,14 @@ interface ITableExampleProps {
 	rows: ComparableType[][];
 }
 
-const TableExample: React.FC<ITableExampleProps> = ({ rows }) => {	
+const TableExample: React.FC<ITableExampleProps> = ({ rows }) => {
 	function cellRenderer (rowIndex: number, columnIndex: number): ReactElement<ICellProps> {
 		return (<Cell>{rows[rowIndex][columnIndex]}</Cell>);
 	}
 
 	return (
 		<HotkeysProvider>
-			<Table2 numRows={100}>
+			<Table2 numRows={rows.length}>
 				<Column name="First Name" cellRenderer={cellRenderer} />
 				<Column name="Last Initial" cellRenderer={cellRenderer} />
 				<Column name="Age" cellRenderer={cellRenderer} />
